@@ -7,24 +7,8 @@
 </head>
 <body>
 <header th:replace="layoutAuth :: site-header" />
-<!--<aside>
-    <h2>Recent Tasks</h2>
-    <a href="#" th:each="t : ${latest5tasks}" th:text="${t.title}" th:href="@{/tasks/view/{id}/(id=${t.id})}">Work Begins on HTML5.1</a>
-</aside>-->
 <main id="tasks">
-   <!-- <article th:each="t : ${latest3tasks}">
-        <h2 class="title" th:text="${t.title}">Task Title</h2>
-        <div class="date">
-            <i>Posted on</i>
-            <span th:text="${#dates.format(t.date, 'dd-MMM-yyyy')}">22-May-2016</span>
-            <span th:if="${t.author}" th:remove="tag">
-          <i>by</i>
-          <span th:text="${t.author.username}">Svetlin Nakov</span>
-        </span>
-        </div>
-        <p class="content" th:utext="${t.body}">Task content</p>
-    </article>-->
-</main>
 <footer th:replace="layoutAuth :: site-footer" />
+</main>
 </body>
 </html>
