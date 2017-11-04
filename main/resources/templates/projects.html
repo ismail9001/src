@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layoutAuth :: site-head">
+</head>
+
+<body>
+
+<header th:replace="layoutAuth :: site-header" />
+
+<main id="projects">
+    <form autocomplete="off" action="#" th:action="@{/projects}"
+          th:object="${project}" method="post" class="form-horizontal"
+          role="form">
+        <input type="text" id="projectName" name="projectName"  th:placeholder="project_name"
+               class="form-control" />
+        <input type="text" id="mainURL" name="mainURL"  th:placeholder="mainURL"
+               class="form-control" />
+        <input type="checkbox" id="public_feedback"
+               class="form-control" /><label for="public_feedback">Public feedback</label>
+    <span th:utext="${successMessage}"></span>
+    <button type="submit" class="add">Add project</button>
+    </form>
+    <article th:each="p : ${findAll}">
+        <table>
+            <tr>
+                <td>
+                    <h2 class="title" th:text="${p.projectName}">Task Title</h2>
+                    <i>Posted on</i>
+                    <span th:text="${p.mainURL}">Main url</span>
+                </td>
+                <td>
+                    <img type="submit" src="../public/img/delete.png" th:src="@{/img/delete.png}" name="p.id"/>
+                </td>
+            </tr>
+        </table>
+    </article>
+</main>
+
+<footer th:replace="layoutAuth :: site-footer" />
+
+</body>
+
+</html>

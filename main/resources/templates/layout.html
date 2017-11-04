@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"><head th:fragment="site-head">
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="../public/css/styles.css" th:href="@{/css/styles.css}" />
+    <link rel="icon" href="../public/img/favicon.ico" th:href="@{/img/favicon.ico}" />
+    <script src="../public/js/jquery-3.1.0.min.js" th:src="@{/js/jquery-3.1.0.min.js}"></script>
+    <script src="../public/js/blog-scripts.js" th:src="@{/js/blog-scripts.js}"></script>
+    <meta th:include="this::head" th:remove="tag"/>
+</head>
+<body>
+<header th:fragment="site-header" th:remove="tag">
+    <header>
+        <div class="menu">
+            <ul>
+                <li class="menuLeft"><a href="index.html" th:href="@{/}">Home</a></li>
+                <li class="menuLeft"><a href="features.html" th:href="@{/}">Features</a></li>
+                <li class="menuLeft"><a href="pricing.html" th:href="@{/}">Pricing</a></li>
+                <li class="menuLeft"><a href="blog.html" th:href="@{/}">Blog</a></li>
+                <li class="menuLeft"><a href="contact.html" th:href="@{/}">Contact</a></li>
+            </ul>
+            <ul>
+                <li class="menuRight">
+
+                    <div sec:authorize="isAuthenticated()">
+                    <a th:href="@{/projects}" th:text="${user.username}">Username</a>
+                    </div>
+                </li>
+                <li class="menuRight">
+                    <div sec:authorize="isAnonymous()">
+                        <a href="registration.html" th:href="@{/registration}">Start Free Trial</a>
+                        <a href="login.html" th:href="@{/login}">Login</a>
+                    </div></li>
+            </ul>
+        </div>
+    </header>
+
+    <ul id="messages" th:with="notifyMessages=${session[T(tracker.services.NotificationServiceImpl).NOTIFY_MSG_SESSION_KEY]}">
+        <li th:each="msg : ${notifyMessages}" th:text="${msg.text}"
+            th:class="${#strings.toLowerCase(msg.type)}">
+        </li>
+        <span th:if="${notifyMessages}" th:remove="all" th:text="${session.remove(
+          T(tracker.services.NotificationServiceImpl).NOTIFY_MSG_SESSION_KEY)}"></span>
+
+    </ul>
+</header>
+<h1>Welcome</h1>
+<p>Welcome to the Spring MVC Bug Tracker.</p>
+<footer th:fragment="site-footer">
+    &copy; Spring MVC Bug Tracker, 2017
+</footer></body></html>
