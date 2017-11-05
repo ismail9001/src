@@ -41,8 +41,13 @@ public class ProjectListController {
         return modelAndView;
     }
     @RequestMapping(value = "/projects/remove", method = RequestMethod.POST)
-    public String removeAd(@RequestParam("project") int projectId) {
+    public String removeP(@RequestParam("project") int projectId) {
         projectService.deleteById(projectId);
+        return "redirect:/projects";
+    }
+    @RequestMapping(value = "/projects/edit", method = RequestMethod.PATCH)
+    public String editP(@RequestParam("project") Project project) {
+        projectService.edit(project);
         return "redirect:/projects";
     }
 }

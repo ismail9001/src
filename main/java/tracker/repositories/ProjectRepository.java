@@ -6,8 +6,6 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import tracker.models.Project;
 import tracker.models.User;
-
-import java.awt.print.Pageable;
 import java.util.List;
 
 @Repository
