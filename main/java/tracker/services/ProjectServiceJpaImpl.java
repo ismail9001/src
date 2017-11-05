@@ -23,8 +23,8 @@ public class ProjectServiceJpaImpl extends UserServiceJpaImpl implements Project
     }
 
     @Override
-    public List<Project> findAll() {
-        return this.projectRepo.findAll();
+    public List<Project> findAll(int id) {
+        return this.projectRepo.findAll(id);
     }
 
     @Override

@@ -10,6 +10,6 @@ import java.util.List;
 
 @Repository
 public interface ProjectRepository extends JpaRepository<Project, Integer> {
-    @Query("SELECT p FROM Project p LEFT JOIN FETCH p.user where p.user = :user")
-    List<Project> findAll(@Param("user")User user);
+    @Query("SELECT p FROM Project p where p.id = :user_id")
+    List<Project> findAll(@Param("user_id")int id);
 }

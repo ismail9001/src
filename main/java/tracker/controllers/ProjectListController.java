@@ -1,6 +1,7 @@
 package tracker.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import tracker.models.Project;
 import tracker.services.ProjectService;
+import tracker.services.UserService;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -18,9 +20,11 @@ import java.util.List;
 public class ProjectListController {
     @Autowired
     private ProjectService projectService;
+    @Autowired
+    private UserService userService;
     @RequestMapping(value = "/projects", method = RequestMethod.GET)
     public String projects (Model model) {
-        List<Project> findAll = projectService.findAll();
+        List<Project> findAll = projectService.findAll(userService.findByEmail(SecurityContextHolder.getContext().getAuthentication().getName()).getId());
 
         model.addAttribute("findAll", findAll);
         return "projects";
@@ -35,7 +39,7 @@ public class ProjectListController {
             modelAndView.addObject("successMessage", "Project has been added succesfully");
             modelAndView.addObject("project", new Project());
             modelAndView.setViewName("projects");
-            List<Project> findAll = projectService.findAll();
+            List<Project> findAll = projectService.findAll(userService.findByEmail(SecurityContextHolder.getContext().getAuthentication().getName()).getId());
             modelAndView.addObject("findAll", findAll);
         }
         return modelAndView;
