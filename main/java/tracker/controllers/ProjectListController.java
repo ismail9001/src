@@ -24,7 +24,7 @@ public class ProjectListController {
     private UserService userService;
     @RequestMapping(value = "/projects", method = RequestMethod.GET)
     public String projects (Model model) {
-        List<Project> findAll = projectService.findAll(userService.findByEmail(SecurityContextHolder.getContext().getAuthentication().getName()).getId());
+        List<Project> findAll = projectService.findAll(userService.findByEmail(SecurityContextHolder.getContext().getAuthentication().getName()));
 
         model.addAttribute("findAll", findAll);
         return "projects";
@@ -39,7 +39,7 @@ public class ProjectListController {
             modelAndView.addObject("successMessage", "Project has been added succesfully");
             modelAndView.addObject("project", new Project());
             modelAndView.setViewName("projects");
-            List<Project> findAll = projectService.findAll(userService.findByEmail(SecurityContextHolder.getContext().getAuthentication().getName()).getId());
+            List<Project> findAll = projectService.findAll(userService.findByEmail(SecurityContextHolder.getContext().getAuthentication().getName()));
             modelAndView.addObject("findAll", findAll);
         }
         return modelAndView;

@@ -1,8 +1,12 @@
 package tracker.models;
 
+import org.hibernate.annotations.GenerationTime;
 import org.hibernate.validator.constraints.NotEmpty;
 
+import javax.annotation.Generated;
 import javax.persistence.*;
+import javax.xml.crypto.Data;
+import java.util.Date;
 
 @Entity
 @Table(name = "projects")
@@ -22,17 +26,28 @@ public class Project {
     private String devURL;
     @Column (nullable = false)
     private boolean publicFeedback;
+    @Column (nullable = false, columnDefinition="boolean default true")
+    private boolean is_actual;
+    @Column
+    private Date date_closed;
+    @org.hibernate.annotations.Generated(GenerationTime.INSERT)
+    @Column (nullable = false, columnDefinition = "DATE default '15-JUL-1980'", insertable = false)
+    private Date date_created;
 
     public Project() {
     }
 
-    public Project(int id, String projectName, User user, String mainURL, String devURL, boolean publicFeedback) {
+    public Project(int id, String projectName, User user, String mainURL, String devURL, boolean publicFeedback,
+                   boolean is_actual, Date date_closed, Date date_created) {
         this.id = id;
         this.projectName = projectName;
         this.user = user;
         this.mainURL = mainURL;
         this.devURL = devURL;
         this.publicFeedback = publicFeedback;
+        this.is_actual = is_actual;
+        this.date_closed = date_closed;
+        this.date_created = date_created;
     }
 
     @Override
@@ -86,5 +101,29 @@ public class Project {
 
     public void setPublicFeedback(boolean publicFeedback) {
         this.publicFeedback = publicFeedback;
+    }
+
+    public boolean isIs_actual() {
+        return is_actual;
+    }
+
+    public void setIs_actual(boolean is_actual) {
+        this.is_actual = is_actual;
+    }
+
+    public Date getDate_closed() {
+        return date_closed;
+    }
+
+    public void setDate_closed(Date date_closed) {
+        this.date_closed = date_closed;
+    }
+
+    public Date getDate_created() {
+        return date_created;
+    }
+
+    public void setDate_created(Date date_created) {
+        this.date_created = date_created;
     }
 }
