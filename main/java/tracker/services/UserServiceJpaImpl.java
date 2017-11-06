@@ -8,7 +8,6 @@ import tracker.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
-
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashSet;

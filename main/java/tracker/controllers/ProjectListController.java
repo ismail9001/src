@@ -12,7 +12,6 @@ import org.springframework.web.servlet.ModelAndView;
 import tracker.models.Project;
 import tracker.services.ProjectService;
 import tracker.services.UserService;
-
 import javax.validation.Valid;
 import java.util.List;
 

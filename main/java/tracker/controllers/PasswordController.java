@@ -3,7 +3,6 @@ package tracker.controllers;
 import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
-
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
@@ -19,7 +18,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import tracker.models.User;
 import tracker.services.EmailService;
 import tracker.services.UserService;
-
 
 @Controller
 public class PasswordController{
@@ -70,10 +68,8 @@ public class PasswordController{
             // Add success message to view
             modelAndView.addObject("successMessage", "A password reset link has been sent to " + userEmail);
         }
-
         modelAndView.setViewName("forgotPassword");
         return modelAndView;
-
     }
 
     // Display form to reset password
@@ -121,7 +117,6 @@ public class PasswordController{
 
         return modelAndView;
     }
-
     // Going to reset page without a token redirects to login page
     @ExceptionHandler(MissingServletRequestParameterException.class)
     public ModelAndView handleMissingParams(MissingServletRequestParameterException ex) {

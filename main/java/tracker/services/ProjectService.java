@@ -2,7 +2,6 @@ package tracker.services;
 
 import tracker.models.Project;
 import tracker.models.User;
-
 import java.util.List;
 
 public interface ProjectService {

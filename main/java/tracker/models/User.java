@@ -3,7 +3,6 @@ package tracker.models;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
-
 import javax.persistence.*;
 import java.util.Date;
 import java.util.HashSet;
@@ -115,7 +114,6 @@ public class User {
         this.task = task;
     }
 
-
     public boolean isEnabled() {
         return enabled;
     }
@@ -147,7 +145,6 @@ public class User {
     public void setResetToken(String resetToken) {
         this.resetToken = resetToken;
     }
-
 
     public Set<Role> getRoles() {
         return roles;

@@ -6,7 +6,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import tracker.models.Task;
 import tracker.repositories.TaskRepository;
-
 import java.util.List;
 
 @Service

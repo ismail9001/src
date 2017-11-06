@@ -2,10 +2,7 @@ package tracker.models;
 
 import org.hibernate.annotations.GenerationTime;
 import org.hibernate.validator.constraints.NotEmpty;
-
-import javax.annotation.Generated;
 import javax.persistence.*;
-import javax.xml.crypto.Data;
 import java.util.Date;
 
 @Entity

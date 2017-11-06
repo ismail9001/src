@@ -1,16 +1,11 @@
 package tracker.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import tracker.models.Project;
 import tracker.models.User;
 import tracker.repositories.ProjectRepository;
-import tracker.repositories.TaskRepository;
-import tracker.repositories.UserRepository;
-
 import java.util.Date;
 import java.util.List;
 

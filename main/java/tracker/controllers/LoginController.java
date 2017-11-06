@@ -8,11 +8,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-
 import tracker.models.User;
 import tracker.services.UserService;
-
-import java.util.Optional;
 
 @Controller
 public class LoginController {
@@ -26,7 +23,6 @@ public class LoginController {
         modelAndView.setViewName("login");
         return modelAndView;
     }
-
 
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public ModelAndView registration() {
@@ -53,7 +49,6 @@ public class LoginController {
             modelAndView.addObject("successMessage", "User has been registered successfully");
             modelAndView.addObject("user", new User());
             modelAndView.setViewName("redirect:login");
-
         }
         return modelAndView;
     }

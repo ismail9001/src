@@ -1,7 +1,6 @@
 package tracker.models;
 
 import org.hibernate.annotations.Type;
-
 import javax.persistence.*;
 import java.util.Date;
 @Entity
@@ -20,6 +19,7 @@ public class Task {
     private User author;
     @Column(nullable = false)
     private Date date = new Date();
+    
     public Task() {
     }
 
