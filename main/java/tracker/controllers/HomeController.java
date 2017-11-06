@@ -5,12 +5,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import tracker.models.Task;
-import tracker.services.TaskService;
 import tracker.services.UserService;
-import java.util.List;
-import java.util.stream.Collectors;
-
 @Controller
 public class HomeController {
     @Autowired
