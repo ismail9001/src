@@ -9,7 +9,19 @@
 <header th:replace="layoutAuth :: site-header" />
 
 <main id="tasks">
-    <article th:each="t : ${latest3tasks}">
+    <form autocomplete="off" action="#" th:action="@{/tasks}"
+          th:object="${task}" method="post" class="form-horizontal"
+          role="form">
+        <input type="text" id="taskTitle" name="Title"  th:placeholder="Title"
+               class="form-control" />
+        <input type="text" id="body" name="body"  th:placeholder="text"
+               class="form-control" />
+        <input type="checkbox" id="public_feedback"
+               class="form-control" /><label for="public_feedback">Public feedback</label>
+        <span th:utext="${successMessage}"></span>
+        <button type="submit" class="add">Add task</button>
+    </form>
+    <article th:each="t : ${findAllTasks}">
         <h2 class="title" th:text="${t.title}">Task Title</h2>
         <div class="date">
             <i>Posted on</i>

@@ -10,5 +10,5 @@ import java.util.List;
 @Repository
 public interface TaskRepository extends JpaRepository<Task, Integer> {
     @Query("SELECT p FROM Task p LEFT JOIN FETCH p.author ORDER BY p.date DESC")
-    List<Task> findLatest5Tasks(Pageable pageable);
+    List<Task> findAll();
 }

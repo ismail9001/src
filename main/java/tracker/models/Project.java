@@ -1,6 +1,5 @@
 package tracker.models;
 
-import org.hibernate.annotations.GenerationTime;
 import org.hibernate.validator.constraints.NotEmpty;
 import javax.persistence.*;
 import java.util.Date;
@@ -27,8 +26,7 @@ public class Project {
     private boolean is_actual;
     @Column
     private Date date_closed;
-    @org.hibernate.annotations.Generated(GenerationTime.INSERT)
-    @Column (nullable = false, columnDefinition = "DATE default '15-JUL-1980'", insertable = false)
+    @Column (nullable = false, columnDefinition = "DATE default '15-JUL-1980'")
     private Date date_created;
 
     public Project() {

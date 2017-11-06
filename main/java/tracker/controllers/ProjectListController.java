@@ -48,9 +48,9 @@ public class ProjectListController {
         projectService.deleteById(projectId);
         return "redirect:/projects";
     }
-    @RequestMapping(value = "/projects/edit", method = RequestMethod.PATCH)
+    /*@RequestMapping(value = "/projects/edit", method = RequestMethod.PATCH)
     public String editP(@RequestParam("project") Project project) {
         projectService.edit(project);
         return "redirect:/projects";
-    }
+    }*/
 }

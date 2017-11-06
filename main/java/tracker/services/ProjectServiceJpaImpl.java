@@ -26,7 +26,9 @@ public class ProjectServiceJpaImpl extends UserServiceJpaImpl implements Project
     @Override
     public Project create(Project project) {
         final String currentUser = SecurityContextHolder.getContext().getAuthentication().getName();
+        System.out.println(currentUser);
         project.setUser(findByEmail(currentUser));
+        project.setIs_actual(true);
         project.setDate_created(new Date());
         return this.projectRepo.save(project);
     }
@@ -38,7 +40,6 @@ public class ProjectServiceJpaImpl extends UserServiceJpaImpl implements Project
 
     @Override
     public void deleteById(int id) {
-            Date date = new Date();
-            this.projectRepo.deleteById(id, date);
+            this.projectRepo.deleteById(id, new Date());
     }
 }
