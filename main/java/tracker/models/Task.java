@@ -19,7 +19,6 @@ public class Task {
     private User author;
     @Column(nullable = false)
     private Date date = new Date();
-    
     public Task() {
     }
 

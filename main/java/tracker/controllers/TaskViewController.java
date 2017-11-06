@@ -10,7 +10,7 @@ import tracker.services.NotificationService;
 import tracker.services.TaskService;
 
 @Controller
-public class TasksController {
+public class TaskViewController {
     @Autowired
     private TaskService taskService;
 

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layoutAuth :: site-head">
+</head>
+
+<body>
+
+<header th:replace="layoutAuth :: site-header" />
+
+<main id="tasks">
+    <article th:each="t : ${latest3tasks}">
+        <h2 class="title" th:text="${t.title}">Task Title</h2>
+        <div class="date">
+            <i>Posted on</i>
+            <span th:text="${#dates.format(t.date, 'dd-MMM-yyyy')}">22-May-2016</span>
+            <span th:if="${t.author}" th:remove="tag">
+          <i>by</i>
+          <span th:text="${t.author.username}">Svetlin Nakov</span>
+        </span>
+        </div>
+        <p class="content" th:utext="${t.body}">Task content</p>
+    </article>
+</main>
+
+<footer th:replace="layoutAuth :: site-footer" />
+
+</body>
+
+</html>
