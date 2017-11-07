@@ -22,7 +22,7 @@ public class Project {
     private String devURL;
     @Column (nullable = false)
     private boolean publicFeedback;
-    @Column (nullable = false, columnDefinition="boolean default true")
+    @Column (nullable = false, columnDefinition = "boolean default true")
     private boolean is_actual;
     @Column
     private Date date_closed;

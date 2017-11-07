@@ -9,18 +9,6 @@
 <header th:replace="layoutAuth :: site-header" />
 
 <main id="projects">
-    <form autocomplete="off" action="#" th:action="@{/projects}"
-          th:object="${project}" method="post" class="form-horizontal"
-          role="form">
-        <input type="text" id="title" name="projectName"  th:placeholder="project_name"
-               class="form-control" />
-        <input type="text" id="mainURL" name="mainURL"  th:placeholder="mainURL"
-               class="form-control" />
-        <input type="checkbox" id="public_feedback"
-               class="form-control" /><label for="public_feedback">Public feedback</label>
-    <span th:utext="${successMessage}"></span>
-    <button type="submit" class="add">Add project</button>
-    </form>
     <article th:each="p : ${findAll}">
         <table>
             <tr>
