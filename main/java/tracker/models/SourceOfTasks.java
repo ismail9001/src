@@ -2,7 +2,6 @@ package tracker.models;
 
 import javax.persistence.*;
 
-
 @Entity
 @Table(name = "sourceOfTacks")
 public class SourceOfTasks {

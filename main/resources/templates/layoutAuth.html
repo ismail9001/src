@@ -12,8 +12,18 @@
 <header th:fragment="site-header" th:remove="tag">
     <header>
         <div class="menu">
-            <ul>
-                <li class="menuLeft"><a href="projects.html" th:href="@{/projects}">Projects</a></li>
+            <ul id="projects_menu">
+                <li class="menuLeft"><a href="projects.html" th:href="@{/projects}">Projects</a>
+                    <ul>
+                        <li>
+                            <article th:each="p : ${findAll}">
+                                    <h2 class="title" th:text="${p.projectName}">Task Title</h2>
+                            </article>
+                        </li>
+                        <li class="menuLeft"><a href="#popap_new_project">Вызвать всплывающее окно</a>
+                        </li>
+                    </ul>
+                </li>
                 <li class="menuLeft"><a href="tasks.html" th:href="@{/tasks}">Tasks</a></li>
             </ul>
             <ul>
@@ -24,7 +34,9 @@
             </ul>
         </div>
     </header>
-
+    <div class="popap_new_project">
+        Всплывающее окошко22!
+    </div>
     <ul id="messages" th:with="notifyMessages=${session[T(tracker.services.NotificationServiceImpl).NOTIFY_MSG_SESSION_KEY]}">
         <li th:each="msg : ${notifyMessages}" th:text="${msg.text}"
             th:class="${#strings.toLowerCase(msg.type)}">

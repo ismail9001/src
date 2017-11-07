@@ -63,6 +63,49 @@ color: white;
     color: red;
     font-style: italic;
 }
+ul#projects_menu li {
+    margin:0;
+    padding:0;
+    list-style-type:none;
+}
+#projects_menu {
+    display:block;
+    position:absolute;
+    top:20px;
+    left:20px;
+
+}
+#projects_menu > li {
+    display:inline-block;
+    height:20px;
+    /* Считаем координаты относительно исходного места. */
+    position:relative;
+}
+#projects_menu > li > ul {
+    position:absolute;
+    top:20px;
+    left: 10px;
+    display:none;
+    background-color: bisque;
+    border-radius: 5px;
+    width: 185px;
+    font-size: 14px;
+    padding: 10 0 10 10;
+}
+#projects_menu > li:hover > ul {
+    display:block;
+}
+#popap_new_project {
+    width: 300px;
+    height: 50px;
+    text-align: center;
+    padding: 15px;
+    border: 3px solid #0000cc;
+    border-radius: 10px;
+    color: #0000cc;
+    display: none;
+}
+#popap_new_project:target {display: block;}
 .menuLeft {
     display: inline-block;
     float: left;
