@@ -9,7 +9,7 @@
 <header th:replace="layoutAuth :: site-header" />
 
 <main id="tasks">
-    <form autocomplete="off" action="#" th:action="@{'/tasks/' + ${id}}"
+    <form autocomplete="off" action="#" th:action="@{'/tasks/' + ${project.id}}"
           th:object="${task}" method="post" class="form-horizontal"
           role="form">
         <input type="text" id="taskTitle" name="Title"  th:placeholder="Title"

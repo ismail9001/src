@@ -25,7 +25,7 @@ public class TaskListController {
     private ProjectService projectService;
     @RequestMapping(value = "/tasks/{project}", method = RequestMethod.GET)
     @ResponseBody
-    public ModelAndView index(@PathVariable Project project) {
+    public ModelAndView index(@PathVariable ("project")Project project) {
         ModelAndView modelAndView = new ModelAndView();
         List<Task> findAll = taskService.findAll(project);
         modelAndView.addObject("findAllTasks", findAll);
@@ -34,12 +34,11 @@ public class TaskListController {
         modelAndView.setViewName("tasks");
         return modelAndView;
     }
-    @RequestMapping(value = "/tasks/{id}", method = RequestMethod.POST)
+    @RequestMapping(value = "/tasks/{project}", method = RequestMethod.POST)
     @ResponseBody
-    public ModelAndView createNewProject(@Valid Task task, BindingResult bindingResult, @PathVariable ("id") int id ) {
-        Project project = projectService.findOne(id);
+    public ModelAndView createNewProject(@Valid Task task, BindingResult bindingResult, @PathVariable ("project")Project project ) {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("id", id);
+        modelAndView.addObject("project", project);
         if (bindingResult.hasErrors()) {
             modelAndView.setViewName("tasks");
         } else {
