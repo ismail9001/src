@@ -8,12 +8,12 @@ import java.util.Date;
 @Table(name = "projects")
 public class Project {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int id;
     @Column(nullable = false)
     @NotEmpty(message = "*Please provide project name")
     private String projectName;
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private User user;
     @Column(nullable = false)
     @NotEmpty(message = "*Please provide main url of your project")
@@ -121,4 +121,6 @@ public class Project {
     public void setDate_created(Date date_created) {
         this.date_created = date_created;
     }
+
+
 }

@@ -10,11 +10,13 @@ import java.util.Date;
 import java.util.List;
 
 @Service
-public class ProjectServiceJpaImpl extends UserServiceJpaImpl implements ProjectService {
+public class ProjectServiceJpaImpl  implements ProjectService {
     @Autowired
     private ProjectRepository projectRepo;
+    @Autowired
+    private UserService userService;
     @Override
-    public Project findById(int id) {
+    public Project findOne(int id) {
         return this.projectRepo.findOne(id);
     }
 
@@ -26,8 +28,7 @@ public class ProjectServiceJpaImpl extends UserServiceJpaImpl implements Project
     @Override
     public Project create(Project project) {
         final String currentUser = SecurityContextHolder.getContext().getAuthentication().getName();
-        System.out.println(currentUser);
-        project.setUser(findByEmail(currentUser));
+        project.setUser(userService.findByEmail(currentUser));
         project.setIs_actual(true);
         project.setDate_created(new Date());
         return this.projectRepo.save(project);

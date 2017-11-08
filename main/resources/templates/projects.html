@@ -13,7 +13,7 @@
         <table>
             <tr>
                 <td>
-                    <h2 class="title" th:text="${p.projectName}">Task Title</h2>
+                    <a th:href="@{'/tasks/' + ${p.id}}" class="title" th:text="${p.projectName}">Task Title</a>
                     <i>Posted on</i>
                     <span th:text="${p.mainURL}">Main url</span>
                 </td>

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import tracker.models.Project;
 import tracker.models.Task;
 import tracker.repositories.TaskRepository;
 import java.util.List;
@@ -16,8 +17,8 @@ public class TaskServiceJpaImpl implements TaskService {
     @Autowired
     private UserService userService;
     @Override
-    public List<Task> findAll() {
-        return this.taskRepo.findAll();
+    public List<Task> findAll(Project project) {
+        return this.taskRepo.findAll(project);
     }
     @Override
     public List<Task> findLatest5() {
@@ -28,9 +29,10 @@ public class TaskServiceJpaImpl implements TaskService {
         return this.taskRepo.findOne(id);
     }
     @Override
-    public Task create(Task task) {
+    public Task create(Task task, Project project) {
         final String currentUser = SecurityContextHolder.getContext().getAuthentication().getName();
         task.setAuthor(userService.findByEmail(currentUser));
+        task.setProject(project);
         return this.taskRepo.save(task);
     }
     @Override

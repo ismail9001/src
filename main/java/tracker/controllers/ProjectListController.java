@@ -24,7 +24,6 @@ public class ProjectListController {
     @RequestMapping(value = "/projects", method = RequestMethod.GET)
     public String projects (Model model) {
         List<Project> findAll = projectService.findAll(userService.findByEmail(SecurityContextHolder.getContext().getAuthentication().getName()));
-
         model.addAttribute("findAll", findAll);
         return "projects";
     }

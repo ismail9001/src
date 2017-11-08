@@ -17,16 +17,19 @@ public class Task {
     private String body;
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private User author;
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private Project project;
     @Column(nullable = false)
     private Date date = new Date();
     public Task() {
     }
 
-    public Task(int id, String title, String body, User author) {
+    public Task(int id, String title, String body, User author, Project project) {
         this.id = id;
         this.title = title;
         this.body = body;
         this.author = author;
+        this.project = project;
     }
 
     @Override
@@ -64,6 +67,14 @@ public class Task {
 
     public void setAuthor(User author) {
         this.author = author;
+    }
+
+    public Project getProject() {
+        return project;
+    }
+
+    public void setProject(Project project) {
+        this.project = project;
     }
 
     public Date getDate() {
