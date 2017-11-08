@@ -13,7 +13,7 @@
 <header th:fragment="site-header" th:remove="tag">
     <header>
         <div class="menu">
-            <ul id="projects_menu">
+            <ul id="projects_menu_left">
                 <li class="menuLeft"><a href="projects.html" th:href="@{/projects}">Projects</a>
                     <ul>
                         <li>
@@ -27,14 +27,24 @@
                 </li>
                 <li class="menuLeft"><a href="tasks.html" th:href="@{/tasks}">Tasks</a></li>
             </ul>
-            <ul>
-                <li class="menuRight"><a href="index.html" th:href="@{/}">Home</a>
+            <ul id="projects_menu_right">
+                <li class="menuRight">
                     <form method="post" th:action="@{/logout}">
-                        <input type="submit" value="Logout"/>
-                    </form></li>
+                        <input type="image" value="Logout" th:src="@{/img/exit.png}"  width="28" height="28"/>
+                    </form>
+                </li>
+                <li class="menuRight"><a href="index.html" th:href="@{/}">Home</a>
+                    <ul>
+                        <li class = "menuRight">
+                            <a href="projects.html" th:href="@{/projects}">Projects</a>
+                        </li>
+                    </ul>
+                </li>
             </ul>
         </div>
     </header>
+
+
 
     <ul id="messages" th:with="notifyMessages=${session[T(tracker.services.NotificationServiceImpl).NOTIFY_MSG_SESSION_KEY]}">
         <li th:each="msg : ${notifyMessages}" th:text="${msg.text}"
