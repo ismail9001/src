@@ -19,17 +19,18 @@
                 <li class="menuLeft"><a href="contact.html" th:href="@{/}">Contact</a></li>
             </ul>
             <ul>
-                <li class="menuRight">
-
-                    <div sec:authorize="isAuthenticated()">
-                    <a th:href="@{/projects}" th:text="${user.username}">Username</a>
-                    </div>
+                <li class="menuRight" sec:authorize="isAuthenticated()">
+                    <form method="post" th:action="@{/logout}">
+                        <input type="image" value="Logout" th:src="@{/img/exit.png}"  width="28" height="28"/>
+                    </form>
                 </li>
-                <li class="menuRight">
-                    <div sec:authorize="isAnonymous()">
-                        <a href="registration.html" th:href="@{/registration}">Start Free Trial</a>
-                        <a href="login.html" th:href="@{/login}">Login</a>
-                    </div></li>
+                <li class="menuRight" sec:authorize="isAuthenticated()">
+                    <a th:href="@{/projects}" th:text="${user.username}">Username</a>
+                </li>
+                <li class="menuRight" sec:authorize="isAnonymous()">
+                    <a href="registration.html" th:href="@{/registration}">Start Free Trial</a>
+                    <a href="login.html" th:href="@{/login}">Login</a>
+                </li>
             </ul>
         </div>
     </header>

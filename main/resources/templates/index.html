@@ -6,10 +6,7 @@
 </head>
 <body>
 <header th:replace="layout :: site-header" />
-<!--<aside>
-    <h2>Recent Tasks</h2>
-    <a href="#" th:each="t : ${latest5tasks}" th:text="${t.title}" th:href="@{/tasks/view/{id}/(id=${t.id})}">Work Begins on HTML5.1</a>
-</aside>-->
+
 <footer th:replace="layout :: site-footer" />
 </body>
 </html>

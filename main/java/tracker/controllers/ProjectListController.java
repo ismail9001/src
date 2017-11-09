@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import tracker.models.Project;
+import tracker.services.NotificationService;
 import tracker.services.ProjectService;
 import tracker.services.UserService;
 import javax.validation.Valid;
@@ -17,10 +18,14 @@ import java.util.List;
 
 @Controller
 public class ProjectListController {
+
     @Autowired
     private ProjectService projectService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private NotificationService notifyService;
+
     @RequestMapping(value = "/projects", method = RequestMethod.GET)
     public String projects (Model model) {
         List<Project> findAll = projectService.findAll(userService.findByEmail(SecurityContextHolder.getContext().getAuthentication().getName()));
@@ -34,7 +39,8 @@ public class ProjectListController {
             modelAndView.setViewName("projects");
         } else {
             projectService.create(project);
-            modelAndView.addObject("successMessage", "Project has been added succesfully");
+            notifyService.addInfoMessage("Project has been added succesfully");
+            //modelAndView.addObject("successMessage", "Project has been added succesfully");
             modelAndView.addObject("project", new Project());
             modelAndView.setViewName("projects");
             List<Project> findAll = projectService.findAll(userService.findByEmail(SecurityContextHolder.getContext().getAuthentication().getName()));
@@ -45,11 +51,12 @@ public class ProjectListController {
     @RequestMapping(value = "/projects/remove", method = RequestMethod.POST)
     public String removeP(@RequestParam("project") int projectId) {
         projectService.deleteById(projectId);
+        notifyService.addInfoMessage("Project has been removed succesfully");
         return "redirect:/projects";
     }
-    /*@RequestMapping(value = "/projects/edit", method = RequestMethod.PATCH)
+    @RequestMapping(value = "/projects/edit", method = RequestMethod.PATCH)
     public String editP(@RequestParam("project") Project project) {
         projectService.edit(project);
         return "redirect:/projects";
-    }*/
+    }
 }

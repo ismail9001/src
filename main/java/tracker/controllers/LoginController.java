@@ -1,5 +1,7 @@
 package tracker.controllers;
 
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import tracker.models.User;
+import tracker.services.NotificationService;
 import tracker.services.UserService;
 
 @Controller
@@ -15,6 +18,8 @@ public class LoginController {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private NotificationService notifyService;
 
     @RequestMapping(value = {"/login"}, method = RequestMethod.GET)
     public ModelAndView login() {
@@ -33,7 +38,7 @@ public class LoginController {
     }
 
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
-    public ModelAndView createNewUser(@Valid User user, BindingResult bindingResult) {
+    public ModelAndView createNewUser(@Valid User user, String password, BindingResult bindingResult, HttpServletRequest httpServletRequest) {
         ModelAndView modelAndView = new ModelAndView();
         User userExists = userService.findByEmail(user.getEmail());
         if (userExists != null) {
@@ -45,9 +50,15 @@ public class LoginController {
             modelAndView.setViewName("registration");
         } else {
             userService.saveUser(user);
-            modelAndView.addObject("successMessage", "User has been registered successfully");
+            notifyService.addInfoMessage("User has been registered successfully");
+            //modelAndView.addObject("successMessage", "User has been registered successfully");
             modelAndView.addObject("user", new User());
-            modelAndView.setViewName("redirect:login");
+            try {
+                httpServletRequest.login(user.getEmail(),password);
+            } catch(ServletException e) {
+                System.out.println(e);
+            }
+            modelAndView.setViewName("redirect:/projects");
         }
         return modelAndView;
     }

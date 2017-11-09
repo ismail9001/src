@@ -35,8 +35,8 @@ public class ProjectServiceJpaImpl  implements ProjectService {
     }
 
     @Override
-    public Project edit(Project post) {
-            return this.projectRepo.save(post);
+    public Project edit(Project project) {
+            return this.projectRepo.save(project);
     }
 
     @Override

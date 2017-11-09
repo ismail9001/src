@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import tracker.models.Project;
 import tracker.models.Task;
+import tracker.services.NotificationService;
 import tracker.services.ProjectService;
 import tracker.services.TaskService;
 import tracker.services.UserService;
@@ -17,12 +18,16 @@ import java.util.List;
 
 @Controller
 public class TaskListController {
+
     @Autowired
     private TaskService taskService;
     @Autowired
     private UserService userService;
     @Autowired
     private ProjectService projectService;
+    @Autowired
+    private NotificationService notifyService;
+
     @RequestMapping(value = "/tasks/{project}", method = RequestMethod.GET)
     @ResponseBody
     public ModelAndView index(@PathVariable ("project")Project project) {
@@ -43,7 +48,8 @@ public class TaskListController {
             modelAndView.setViewName("tasks");
         } else {
             taskService.create(task, project);
-            modelAndView.addObject("successMessage", "Task has been added succesfully");
+            notifyService.addInfoMessage("Task has been added succesfully");
+            //modelAndView.addObject("successMessage", "Task has been added succesfully");
             modelAndView.addObject("task", new Task());
             modelAndView.setViewName("tasks");
             List<Task> findAll = taskService.findAll(project);
@@ -57,7 +63,8 @@ public class TaskListController {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("project", project);
         taskService.deleteById(taskId);
-        modelAndView.addObject("successMessage", "Task has been removed succesfully");
+        notifyService.addInfoMessage("Task has been removed succesfully");
+       // modelAndView.addObject("successMessage", "Task has been removed succesfully");
         modelAndView.setViewName("tasks");
         List<Task> findAll = taskService.findAll(project);
         modelAndView.addObject("findAllTasks", findAll);
