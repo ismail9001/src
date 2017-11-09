@@ -22,16 +22,27 @@
         <button type="submit" class="add">Add task</button>
     </form>
     <article th:each="t : ${findAllTasks}">
-        <h2 class="title" th:text="${t.title}">Task Title</h2>
-        <div class="date">
-            <i>Posted on</i>
-            <span th:text="${#dates.format(t.date, 'dd-MMM-yyyy')}">22-May-2016</span>
-            <span th:if="${t.author}" th:remove="tag">
-          <i>by</i>
-          <span th:text="${t.author.username}">Svetlin Nakov</span>
-        </span>
-        </div>
-        <p class="content" th:utext="${t.body}">Task content</p>
+        <table><h2 class="title" th:text="${t.title}">Task Title</h2>
+            <tr>
+                <td>
+                    <div class="date">
+                    <i>Posted on</i>
+                    <span th:text="${#dates.format(t.date_created, 'dd-MMM-yyyy')}">22-May-2016</span>
+                    <span th:if="${t.author}" th:remove="tag">
+                        <i>by</i>
+                        <span th:text="${t.author.username}">Svetlin Nakov</span>
+                    </span>
+                    </div>
+                    <p class="content" th:utext="${t.body}">Task content</p>
+                </td>
+                <td>
+                    <form th:action="@{'/tasks/' + ${project.id} + '/remove'}" method="POST">
+                        <input id="task" name="task" type="hidden" th:value="${t.id}"/>
+                        <input type="image" value="delete" th:src="@{/img/delete.png}" onClick="return confirm('sure?')"/>
+                    </form>
+                </td>
+            </tr>
+        </table>
     </article>
 </main>
 

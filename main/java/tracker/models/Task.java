@@ -19,17 +19,24 @@ public class Task {
     private User author;
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Project project;
-    @Column(nullable = false)
-    private Date date = new Date();
+    @Column (nullable = false, columnDefinition = "boolean default true")
+    private boolean is_actual;
+    @Column
+    private Date date_closed;
+    @Column (nullable = false, columnDefinition = "DATE default '15-JUL-1980'")
+    private Date date_created;
     public Task() {
     }
 
-    public Task(int id, String title, String body, User author, Project project) {
+    public Task(int id, String title, String body, User author, Project project, boolean is_actual, Date date_closed, Date date_created) {
         this.id = id;
         this.title = title;
         this.body = body;
         this.author = author;
         this.project = project;
+        this.is_actual = is_actual;
+        this.date_closed = date_closed;
+        this.date_created = date_created;
     }
 
     @Override
@@ -77,11 +84,27 @@ public class Task {
         this.project = project;
     }
 
-    public Date getDate() {
-        return date;
+    public boolean isIs_actual() {
+        return is_actual;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setIs_actual(boolean is_actual) {
+        this.is_actual = is_actual;
+    }
+
+    public Date getDate_closed() {
+        return date_closed;
+    }
+
+    public void setDate_closed(Date date_closed) {
+        this.date_closed = date_closed;
+    }
+
+    public Date getDate_created() {
+        return date_created;
+    }
+
+    public void setDate_created(Date date_created) {
+        this.date_created = date_created;
     }
 }

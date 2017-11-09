@@ -51,4 +51,16 @@ public class TaskListController {
         }
         return modelAndView;
     }
+    @RequestMapping(value = "/tasks/{project}/remove", method = RequestMethod.POST)
+    @ResponseBody
+    public ModelAndView removeT(@RequestParam("task") int taskId, @PathVariable ("project")Project project ) {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("project", project);
+        taskService.deleteById(taskId);
+        modelAndView.addObject("successMessage", "Task has been removed succesfully");
+        modelAndView.setViewName("tasks");
+        List<Task> findAll = taskService.findAll(project);
+        modelAndView.addObject("findAllTasks", findAll);
+        return modelAndView;
+    }
 }

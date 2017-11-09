@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 import tracker.models.Project;
 import tracker.models.Task;
 import tracker.repositories.TaskRepository;
+
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -32,6 +34,8 @@ public class TaskServiceJpaImpl implements TaskService {
     public Task create(Task task, Project project) {
         final String currentUser = SecurityContextHolder.getContext().getAuthentication().getName();
         task.setAuthor(userService.findByEmail(currentUser));
+        task.setDate_created(new Date());
+        task.setIs_actual(true);
         task.setProject(project);
         return this.taskRepo.save(task);
     }
@@ -41,6 +45,6 @@ public class TaskServiceJpaImpl implements TaskService {
     }
     @Override
     public void deleteById(int id) {
-        this.taskRepo.delete(id);
+        this.taskRepo.deleteById(id, new Date());
     }
 }
