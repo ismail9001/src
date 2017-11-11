@@ -3,11 +3,11 @@ package tracker.models;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "sourceOfTacks")
-public class SourceOfTasks {
+@Table(name = "TaskSource")
+public class TaskSource {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="source_id")
+    @Column(name="id")
     private int id;
     @Column(nullable = false, name="source")
     private String source;

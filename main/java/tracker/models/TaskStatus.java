@@ -3,8 +3,9 @@ package tracker.models;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "task_status")
+@Table(name = "TaskStatus")
 public class TaskStatus {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="id")

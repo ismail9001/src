@@ -36,6 +36,11 @@
                     <p class="content" th:utext="${t.body}">Task content</p>
                 </td>
                 <td>
+                    <select >
+                        <option th:each="s : ${findAllStatus}" th:text="${s.status} "></option>
+                    </select>
+                </td>
+                <td>
                     <form th:action="@{'/tasks/' + ${project.id} + '/remove'}" method="POST">
                         <input id="task" name="task" type="hidden" th:value="${t.id}"/>
                         <input type="image" value="delete" th:src="@{/img/delete.png}" onClick="return confirm('sure?')"/>

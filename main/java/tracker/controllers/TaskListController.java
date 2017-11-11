@@ -3,16 +3,13 @@ package tracker.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import tracker.models.Project;
 import tracker.models.Task;
-import tracker.services.NotificationService;
-import tracker.services.ProjectService;
-import tracker.services.TaskService;
-import tracker.services.UserService;
+import tracker.models.TaskStatus;
+import tracker.services.*;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -27,13 +24,18 @@ public class TaskListController {
     private ProjectService projectService;
     @Autowired
     private NotificationService notifyService;
+    @Autowired
+    private TaskStatusService taskStatusService;
 
     @RequestMapping(value = "/tasks/{project}", method = RequestMethod.GET)
     @ResponseBody
     public ModelAndView index(@PathVariable ("project")Project project) {
         ModelAndView modelAndView = new ModelAndView();
         List<Task> findAll = taskService.findAll(project);
+        List<TaskStatus> findAllStatus = taskStatusService.findAll();
+        System.out.println(findAllStatus);
         modelAndView.addObject("findAllTasks", findAll);
+        modelAndView.addObject("findAllStatus", findAllStatus);
         final String currentUser = SecurityContextHolder.getContext().getAuthentication().getName();
         modelAndView.addObject("user", userService.findByEmail(currentUser));
         modelAndView.setViewName("tasks");

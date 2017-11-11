@@ -25,6 +25,7 @@ public class Task {
     private Date date_closed;
     @Column (nullable = false, columnDefinition = "DATE default '15-JUL-1980'")
     private Date date_created;
+    
     public Task() {
     }
 
