@@ -13,7 +13,7 @@ import java.util.List;
 
 @Repository
 public interface ProjectRepository extends JpaRepository<Project, Integer> {
-    @Query("SELECT p FROM Project p WHERE p.is_actual = 't' AND p.user = :user_id")
+    @Query("SELECT p FROM Project p WHERE p.is_actual = 't' AND p.user = :user_id ORDER BY p.date_created")
     List<Project> findAll(@Param("user_id")User user);
     @Modifying(clearAutomatically = true)
     @Transactional

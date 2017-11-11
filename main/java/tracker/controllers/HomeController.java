@@ -9,10 +9,11 @@ import tracker.services.UserService;
 
 @Controller
 public class HomeController {
+
     @Autowired
     private UserService userService;
     @RequestMapping("/")
-    //вывод на главной странице списка из 3 и 5 последних задач
+
     public String index(Model model) {
         final String currentUser = SecurityContextHolder.getContext().getAuthentication().getName();
         model.addAttribute("user", userService.findByEmail(currentUser));

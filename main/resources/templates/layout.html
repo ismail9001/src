@@ -3,7 +3,7 @@
     <meta charset="UTF-8" />
     <link rel="stylesheet" href="../public/css/styles.css" th:href="@{/css/styles.css}" />
     <link rel="icon" href="../public/img/favicon.ico" th:href="@{/img/favicon.ico}" />
-    <script src="../public/js/jquery-3.1.0.min.js" th:src="@{/js/jquery-3.1.0.min.js}"></script>
+    <script src="../public/js/jquery-3.2.1.min.js" th:src="@{/js/jquery-3.2.1.min.js}"></script>
     <script src="../public/js/blog-scripts.js" th:src="@{/js/blog-scripts.js}"></script>
     <meta th:include="this::head" th:remove="tag"/>
 </head>
@@ -34,14 +34,12 @@
             </ul>
         </div>
     </header>
-
     <ul id="messages" th:with="notifyMessages=${session[T(tracker.services.NotificationServiceImpl).NOTIFY_MSG_SESSION_KEY]}">
         <li th:each="msg : ${notifyMessages}" th:text="${msg.text}"
             th:class="${#strings.toLowerCase(msg.type)}">
         </li>
         <span th:if="${notifyMessages}" th:remove="all" th:text="${session.remove(
           T(tracker.services.NotificationServiceImpl).NOTIFY_MSG_SESSION_KEY)}"></span>
-
     </ul>
 </header>
 <h1>Welcome</h1>

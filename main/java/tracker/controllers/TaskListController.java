@@ -39,6 +39,7 @@ public class TaskListController {
         modelAndView.setViewName("tasks");
         return modelAndView;
     }
+
     @RequestMapping(value = "/tasks/{project}", method = RequestMethod.POST)
     @ResponseBody
     public ModelAndView createNewProject(@Valid Task task, BindingResult bindingResult, @PathVariable ("project")Project project ) {
@@ -64,7 +65,7 @@ public class TaskListController {
         modelAndView.addObject("project", project);
         taskService.deleteById(taskId);
         notifyService.addInfoMessage("Task has been removed succesfully");
-       // modelAndView.addObject("successMessage", "Task has been removed succesfully");
+        // modelAndView.addObject("successMessage", "Task has been removed succesfully");
         modelAndView.setViewName("tasks");
         List<Task> findAll = taskService.findAll(project);
         modelAndView.addObject("findAllTasks", findAll);

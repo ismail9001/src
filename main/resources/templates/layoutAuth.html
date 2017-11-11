@@ -1,12 +1,10 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"><head th:fragment="site-head">
+<html xmlns:th="http://www.thymeleaf.org"><head th:fragment="site-head">
     <meta charset="UTF-8" />
     <link rel="stylesheet" href="../public/css/styles.css" th:href="@{/css/styles.css}" />
     <link rel="icon" href="../public/img/favicon.ico" th:href="@{/img/favicon.ico}" />
-    <script src="../public/js/jquery-3.1.0.min.js" th:src="@{/js/jquery-3.1.0.min.js}"></script>
+    <script src="../public/js/jquery-3.2.1.min.js" th:src="@{/js/jquery-3.2.1.min.js}"></script>
     <script src="../public/js/blog-scripts.js" th:src="@{/js/blog-scripts.js}"></script>
-    <script src="../public/js/popap.js" th:src="@{/js/popap.js}"></script>
     <meta th:include="this::head" th:remove="tag"/>
 </head>
 <body>
@@ -14,9 +12,12 @@
     <header>
         <div class="menu">
             <ul id="projects_menu_left">
+                <li>
+                    Dashboard
+                </li>
                 <li class="menuLeft">
                     <div th:if="${findAll.isEmpty()}">
-                        <a href='#' onclick='overlay()'>Add project</a>
+                        <a href='#' onclick='overlay2()'>Add project</a>
                     </div>
                     <div th:if="${!findAll.isEmpty()}">
                         <a th:href="@{'/tasks/' + ${findAll[0].id}}" th:text="${findAll[0].projectName}"></a>
@@ -33,7 +34,7 @@
                         </li>
                         <li class="menuLeft" >
                             <div th:if="${!findAll.isEmpty()}">
-                                <a href='#' onclick='overlay()'>Add project</a>
+                                <a href='#' onclick='overlay2()'>Add project</a>
                             </div>
                         </li>
                     </ul>
@@ -62,7 +63,7 @@
         <span th:if="${notifyMessages}" th:remove="all" th:text="${session.remove(
           T(tracker.services.NotificationServiceImpl).NOTIFY_MSG_SESSION_KEY)}"></span>
     </ul>
-    <div id="overlay">
+    <div id="overlay2">
         <div>
             <p>Content you want the user to see goes here.</p>
             <form autocomplete="off" action="#" th:action="@{/projects}"
@@ -76,8 +77,7 @@
                        class="form-control" /><label for="public_feedback">Public feedback</label>
                 <span th:utext="${successMessage}"></span>
                 <button type="submit" class="add">Add project</button>
-            </form>
-            Click here to <a href='#' onclick='overlay()'>close</a>
+            </form>Click here to <a href='#' onclick='overlay()'>close</a>
         </div>
     </div>
 </header>

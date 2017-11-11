@@ -19,6 +19,7 @@ public class ProjectListControllerAdvice {
     @Autowired
     private UserService userService;
     @ModelAttribute
+
     public String projects (Model model) {
         List<Project> findAll = projectService.findAll(userService.findByEmail(SecurityContextHolder.getContext().getAuthentication().getName()));
         model.addAttribute("findAll", findAll);

@@ -11,9 +11,9 @@ import tracker.services.TaskService;
 
 @Controller
 public class TaskViewController {
+
     @Autowired
     private TaskService taskService;
-
     @Autowired
     private NotificationService notifyService;
 

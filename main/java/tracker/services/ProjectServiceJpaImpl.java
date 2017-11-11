@@ -11,6 +11,7 @@ import java.util.List;
 
 @Service
 public class ProjectServiceJpaImpl  implements ProjectService {
+
     @Autowired
     private ProjectRepository projectRepo;
     @Autowired
@@ -35,8 +36,10 @@ public class ProjectServiceJpaImpl  implements ProjectService {
     }
 
     @Override
-    public Project edit(Project project) {
-            return this.projectRepo.save(project);
+    public Project edit(Project project, String projectName, String mainURL) {
+        project.setProjectName(projectName);
+        project.setMainURL(mainURL);
+        return this.projectRepo.save(project);
     }
 
     @Override

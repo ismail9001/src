@@ -54,9 +54,18 @@ public class ProjectListController {
         notifyService.addInfoMessage("Project has been removed succesfully");
         return "redirect:/projects";
     }
-    @RequestMapping(value = "/projects/edit", method = RequestMethod.PATCH)
-    public String editP(@RequestParam("project") Project project) {
-        projectService.edit(project);
+    @RequestMapping(value = "/projects/edit", method = RequestMethod.POST)
+    public String editP(@RequestParam("project") Project project, String projectName, String mainURL, BindingResult bindingResult) {
+        if (bindingResult.hasErrors())
+        {
+            notifyService.addErrorMessage("Project couldn't be edited");
+            return "redirect:/projects";
+        }
+        else {
+            System.out.println(project.getId() + " " + projectName + " " + mainURL);
+            projectService.edit(project, projectName, mainURL);
+            notifyService.addInfoMessage("Project has been edited");
+        }
         return "redirect:/projects";
     }
 }
