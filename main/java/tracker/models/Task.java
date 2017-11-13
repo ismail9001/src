@@ -25,11 +25,14 @@ public class Task {
     private Date date_closed;
     @Column (nullable = false, columnDefinition = "DATE default '15-JUL-1980'")
     private Date date_created;
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    @JoinColumn(name="task_status_id")
+    private TaskStatus taskStatus;
     
     public Task() {
     }
 
-    public Task(int id, String title, String body, User author, Project project, boolean is_actual, Date date_closed, Date date_created) {
+    public Task(int id, String title, String body, User author, Project project, boolean is_actual, Date date_closed, Date date_created, TaskStatus taskStatus) {
         this.id = id;
         this.title = title;
         this.body = body;
@@ -38,6 +41,7 @@ public class Task {
         this.is_actual = is_actual;
         this.date_closed = date_closed;
         this.date_created = date_created;
+        this.taskStatus = taskStatus;
     }
 
     @Override
@@ -107,5 +111,13 @@ public class Task {
 
     public void setDate_created(Date date_created) {
         this.date_created = date_created;
+    }
+
+    public TaskStatus getTaskStatus() {
+        return taskStatus;
+    }
+
+    public void setTaskStatus(TaskStatus taskStatus) {
+        this.taskStatus = taskStatus;
     }
 }

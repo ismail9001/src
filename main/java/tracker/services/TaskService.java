@@ -2,6 +2,8 @@ package tracker.services;
 
 import tracker.models.Project;
 import tracker.models.Task;
+import tracker.models.TaskStatus;
+
 import java.util.List;
 
 public interface TaskService {
@@ -9,6 +11,6 @@ public interface TaskService {
     List<Task> findLatest5();
     Task findById(int id);
     Task create(Task task, Project project);
-    Task edit(Task task);
+    Task edit(Task task, TaskStatus taskStatus);
     void deleteById(int id);
 }

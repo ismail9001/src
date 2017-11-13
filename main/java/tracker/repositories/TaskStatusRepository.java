@@ -9,8 +9,9 @@ import tracker.models.TaskStatus;
 import java.util.List;
 
 @Repository
-public interface TaskStatusRepository extends JpaRepository<TaskStatus, Integer>
-    {
-        @Query("SELECT t FROM TaskStatus t")
-        List<TaskStatus> findAll();
-    }
+public interface TaskStatusRepository extends JpaRepository<TaskStatus, Integer> {
+    @Query("SELECT t FROM TaskStatus t")
+    List<TaskStatus> findAll();
+
+    TaskStatus findByStatus(String status);
+}

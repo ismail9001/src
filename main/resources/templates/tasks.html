@@ -36,9 +36,14 @@
                     <p class="content" th:utext="${t.body}">Task content</p>
                 </td>
                 <td>
-                    <select >
-                        <option th:each="s : ${findAllStatus}" th:text="${s.status} "></option>
-                    </select>
+                    <form th:action="@{'/tasks/' + ${project.id} + '/edit'}" method="POST">
+                        <input id="taskStatus" name="task" type="hidden" th:value="${t.id}"/>
+                        <select name="TaskStatus" onchange="this.form.submit()">
+                            <option th:each="s : ${findAllStatus}"  th:value="${s.status}" th:text="${s.status}"
+                                    th:name="TaskStatus" th:selected="${s.id == t.taskStatus.id}"></option>
+                        </select>
+                        <button type="submit" class="add">Add project</button>
+                    </form>
                 </td>
                 <td>
                     <form th:action="@{'/tasks/' + ${project.id} + '/remove'}" method="POST">

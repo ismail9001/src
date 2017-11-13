@@ -6,7 +6,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import tracker.models.Project;
 import tracker.models.Task;
+import tracker.models.TaskStatus;
 import tracker.repositories.TaskRepository;
+import tracker.repositories.TaskStatusRepository;
 
 import java.util.Date;
 import java.util.List;
@@ -18,6 +20,9 @@ public class TaskServiceJpaImpl implements TaskService {
     private TaskRepository taskRepo;
     @Autowired
     private UserService userService;
+    @Autowired
+    private TaskStatusRepository taskStatusRepo;
+
     @Override
     public List<Task> findAll(Project project) {
         return this.taskRepo.findAll(project);
@@ -37,11 +42,13 @@ public class TaskServiceJpaImpl implements TaskService {
         task.setDate_created(new Date());
         task.setIs_actual(true);
         task.setProject(project);
+        task.setTaskStatus(taskStatusRepo.findByStatus("New"));
         return this.taskRepo.save(task);
     }
     @Override
-    public Task edit(Task post) {
-        return this.taskRepo.save(post);
+    public Task edit(Task task, TaskStatus taskStatus) {
+        task.setTaskStatus(taskStatus);
+        return this.taskRepo.save(task);
     }
     @Override
     public void deleteById(int id) {
