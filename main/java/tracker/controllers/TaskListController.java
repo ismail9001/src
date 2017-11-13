@@ -31,7 +31,7 @@ public class TaskListController {
     @Autowired
     private TaskStatusRepository taskStatusRepository;
 
-    @RequestMapping(value = "/tasks/{project}", method = RequestMethod.GET)
+    @RequestMapping(value = "/{project}/tasks", method = RequestMethod.GET)
     @ResponseBody
     public ModelAndView index(@PathVariable ("project")Project project) {
         ModelAndView modelAndView = new ModelAndView();
@@ -45,7 +45,7 @@ public class TaskListController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/tasks/{project}", method = RequestMethod.POST)
+    @RequestMapping(value = "/{project}/tasks", method = RequestMethod.POST)
     @ResponseBody
     public ModelAndView createNewProject(@Valid Task task, BindingResult bindingResult, @PathVariable ("project")Project project ) {
         ModelAndView modelAndView = new ModelAndView();
@@ -64,7 +64,7 @@ public class TaskListController {
         }
         return modelAndView;
     }
-    @RequestMapping(value = "/tasks/{project}/remove", method = RequestMethod.POST)
+    @RequestMapping(value = "/{project}/tasks/remove", method = RequestMethod.POST)
     @ResponseBody
     public ModelAndView removeT(@RequestParam("task") int taskId, @PathVariable ("project")Project project ) {
         ModelAndView modelAndView = new ModelAndView();
@@ -79,7 +79,7 @@ public class TaskListController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/tasks/{project}/edit", method = RequestMethod.POST)
+    @RequestMapping(value = "/{project}/tasks/edit", method = RequestMethod.POST)
     @ResponseBody
     public ModelAndView editT(@RequestParam("task") int taskId, @RequestParam("TaskStatus") String taskStatus, @PathVariable ("project")Project project) {
 

@@ -36,17 +36,16 @@
                     <p class="content" th:utext="${t.body}">Task content</p>
                 </td>
                 <td>
-                    <form th:action="@{'/tasks/' + ${project.id} + '/edit'}" method="POST">
+                    <form th:action="@{'/' + ${project.id} + '/tasks/edit'}" method="POST">
                         <input id="taskStatus" name="task" type="hidden" th:value="${t.id}"/>
                         <select name="TaskStatus" onchange="this.form.submit()">
                             <option th:each="s : ${findAllStatus}"  th:value="${s.status}" th:text="${s.status}"
                                     th:name="TaskStatus" th:selected="${s.id == t.taskStatus.id}"></option>
                         </select>
-                        <button type="submit" class="add">Add project</button>
                     </form>
                 </td>
                 <td>
-                    <form th:action="@{'/tasks/' + ${project.id} + '/remove'}" method="POST">
+                    <form th:action="@{'/' + ${project.id} + '/tasks/remove'}" method="POST">
                         <input id="task" name="task" type="hidden" th:value="${t.id}"/>
                         <input type="image" value="delete" th:src="@{/img/delete.png}" onClick="return confirm('sure?')"/>
                     </form>

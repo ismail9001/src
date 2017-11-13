@@ -64,7 +64,6 @@ public class ProjectListController {
             return "redirect:/projects";
         }
         else {
-            System.out.println(project.getId() + " " + projectName + " " + mainURL);
             projectService.edit(project, projectName, mainURL);
             notifyService.addInfoMessage("Project has been edited");
         }

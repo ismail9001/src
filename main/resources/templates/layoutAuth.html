@@ -20,14 +20,14 @@
                         <a href='#' onclick='overlay2()'>Add project</a>
                     </div>
                     <div th:if="${!findAll.isEmpty()}">
-                        <a th:href="@{'/tasks/' + ${findAll[0].id}}" th:text="${findAll[0].projectName}"></a>
+                        <a th:href="@{'/' + ${findAll[0].id} + '/tasks'}" th:text="${findAll[0].projectName}"></a>
                     </div>
                     <ul>
                         <li>
                             <div th:if="${!findAll.isEmpty()}">
                                 <article th:each="p,stat : ${findAll}">
                                     <div th:if="${stat.index != 0}">
-                                        <a th:href="@{'/tasks/' + ${p.id}}" class="title" th:text="${p.projectName}">Task Title</a>
+                                        <a th:href="@{'/' + ${p.id} + '/tasks'}" class="title" th:text="${p.projectName}">Task Title</a>
                                     </div>
                                 </article>
                             </div>
