@@ -5,6 +5,7 @@
     <link rel="icon" href="../public/img/favicon.ico" th:href="@{/img/favicon.ico}" />
     <script src="../public/js/jquery-3.2.1.min.js" th:src="@{/js/jquery-3.2.1.min.js}"></script>
     <script src="../public/js/blog-scripts.js" th:src="@{/js/blog-scripts.js}"></script>
+    <script src="../public/js/popup.js" th:src="@{/js/popup.js}"></script>
     <meta th:include="this::head" th:remove="tag"/>
 </head>
 <body>
@@ -13,19 +14,19 @@
         <div class="menu">
             <ul id="projects_menu_left">
                 <li>
-                    Dashboard
+                    <a th:href="@{/p.id/dashboard}" >Dashboard</a>
                 </li>
                 <li class="menuLeft">
-                    <div th:if="${findAll.isEmpty()}">
+                    <div th:if="${findAllProjects.isEmpty()}">
                         <a href='#' onclick='overlay2()'>Add project</a>
                     </div>
-                    <div th:if="${!findAll.isEmpty()}">
-                        <a th:href="@{'/' + ${findAll[0].id} + '/tasks'}" th:text="${findAll[0].projectName}"></a>
+                    <div th:if="${!findAllProjects.isEmpty()}">
+                        <a th:href="@{'/' + ${findAllProjects[0].id} + '/tasks'}" th:text="${findAllProjects[0].projectName}"></a>
                     </div>
                     <ul>
                         <li>
-                            <div th:if="${!findAll.isEmpty()}">
-                                <article th:each="p,stat : ${findAll}">
+                            <div th:if="${!findAllProjects.isEmpty()}">
+                                <article th:each="p,stat : ${findAllProjects}">
                                     <div th:if="${stat.index != 0}">
                                         <a th:href="@{'/' + ${p.id} + '/tasks'}" class="title" th:text="${p.projectName}">Task Title</a>
                                     </div>
@@ -33,7 +34,7 @@
                             </div>
                         </li>
                         <li class="menuLeft" >
-                            <div th:if="${!findAll.isEmpty()}">
+                            <div th:if="${!findAllProjects.isEmpty()}">
                                 <a href='#' onclick='overlay2()'>Add project</a>
                             </div>
                         </li>
@@ -48,6 +49,9 @@
                 </li>
                 <li class="menuRight"><a href="index.html" th:href="@{/}">Home</a>
                     <ul>
+                        <li class = "menuRight">
+                            <a href="account.html" th:href="@{/account}">Account</a>
+                        </li>
                         <li class = "menuRight">
                             <a href="projects.html" th:href="@{/projects}">Projects</a>
                         </li>
@@ -70,14 +74,14 @@
                   th:object="${project}" method="post" class="form-horizontal"
                   role="form">
                 <input type="text" id="title" name="projectName"  th:placeholder="project_name"
-                       class="form-control" />
+                       class="input" />
                 <input type="text" id="mainURL" name="mainURL"  th:placeholder="mainURL"
-                       class="form-control" />
+                       class="input" />
                 <input type="checkbox" id="public_feedback"
-                       class="form-control" /><label for="public_feedback">Public feedback</label>
+                       class="checkbox" /><label for="public_feedback">Public feedback</label>
                 <span th:utext="${successMessage}"></span>
                 <button type="submit" class="add">Add project</button>
-            </form>Click here to <a href='#' onclick='overlay()'>close</a>
+            </form>Click here to <a href='#' onclick='overlay2()'>close</a>
         </div>
     </div>
 </header>

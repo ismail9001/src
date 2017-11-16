@@ -15,8 +15,8 @@ public class HomeController {
     @RequestMapping("/")
 
     public String index(Model model) {
-        final String currentUser = SecurityContextHolder.getContext().getAuthentication().getName();
-        model.addAttribute("user", userService.findByEmail(currentUser));
+        //final String currentUser = SecurityContextHolder.getContext().getAuthentication().getName();
+        //model.addAttribute("user", userService.findByEmail(currentUser));
         return "index";
     }
 }

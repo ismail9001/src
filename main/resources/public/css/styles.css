@@ -350,3 +350,24 @@ a#login_pop:hover, a#join_pop:hover {
 .close:hover {
     background-color: rgba(64, 128, 128, 0.8);
 }
+
+/*чистый код */
+.input {
+    display: block;
+    box-sizing: border-box;
+    width: 15rem;
+    height: 2.4375rem;
+    padding: .5rem;
+    border: 1px solid #dde4ed;
+    margin: 0 0 1rem;
+    font-family: inherit;
+    font-size: 1rem;
+    color: #000;
+    background-color: #fff;
+    box-shadow: inset 0 1px 2px rgba(10,10,10,.1);
+    border-radius: 3px;
+    -webkit-transition: box-shadow .5s,border-color .25s ease-in-out;
+    transition: box-shadow .5s,border-color .25s ease-in-out;
+    -webkit-appearance: none;
+
+}

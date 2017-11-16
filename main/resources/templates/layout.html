@@ -25,7 +25,7 @@
                     </form>
                 </li>
                 <li class="menuRight" sec:authorize="isAuthenticated()">
-                    <a th:href="@{/projects}" th:text="${user.username}">Username</a>
+                    <a th:href="@{/projects}" >Username</a>
                 </li>
                 <li class="menuRight" sec:authorize="isAnonymous()">
                     <a href="registration.html" th:href="@{/registration}">Start Free Trial</a>

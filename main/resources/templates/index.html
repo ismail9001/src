@@ -6,37 +6,6 @@
 </head>
 <body>
 <header th:replace="layout :: site-header" />
-<table>
-    <tr>
-        <td>Петя</td>
-        <td>10</td>
-        <td>Зелёный</td>
-        <td><a href="" class="open_modal">Открыть окно</a>
-        </td>
-    </tr>
-    <tr>
-        <td>Коля</td>
-        <td>20</td>
-        <td>Красный</td>
-        <td><a href="" class="open_modal">Открыть окно</a>
-        </td>
-    </tr>
-    <tr>
-        <td>Вася</td>
-        <td>100500</td>
-        <td>Синий</td>
-        <td><a href="" class="open_modal">Открыть окно</a>
-        </td>
-    </tr>
-</table>
-<div id="overlay"></div>
-<div id="modal_wrapper">
-    <div id="modal"> <span id="close_modal">Х</span>
-
-        <div></div>
-    </div>
-</div>
 <footer th:replace="layout :: site-footer" />
-<script src="../public/js/pop.js" th:src="@{/js/pop.js}"></script>
 </body>
 </html>

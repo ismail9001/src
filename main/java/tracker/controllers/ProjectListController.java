@@ -5,9 +5,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import tracker.models.Project;
 import tracker.models.TaskStatus;
@@ -57,16 +55,10 @@ public class ProjectListController {
         return "redirect:/projects";
     }
     @RequestMapping(value = "/projects/edit", method = RequestMethod.POST)
-    public String editP(@RequestParam("project") Project project, String projectName, String mainURL, BindingResult bindingResult) {
-        if (bindingResult.hasErrors())
-        {
-            notifyService.addErrorMessage("Project couldn't be edited");
-            return "redirect:/projects";
-        }
-        else {
-            projectService.edit(project, projectName, mainURL);
-            notifyService.addInfoMessage("Project has been edited");
-        }
+    public String editP(@RequestParam("project") Project project, String projectName, String mainURL) {
+        System.out.println(project);
+        projectService.edit(project, projectName, mainURL);
+        notifyService.addInfoMessage("Project has been edited");
         return "redirect:/projects";
     }
 }

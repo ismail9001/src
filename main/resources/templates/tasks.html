@@ -9,15 +9,15 @@
 <header th:replace="layoutAuth :: site-header" />
 
 <main id="tasks">
-    <form autocomplete="off" action="#" th:action="@{'/tasks/' + ${project.id}}"
+    <form autocomplete="off" action="#" th:action="@{'/' + ${project.id} + '/tasks/'}"
           th:object="${task}" method="post" class="form-horizontal"
           role="form">
         <input type="text" id="taskTitle" name="Title"  th:placeholder="Title"
-               class="form-control" />
+               class="input" />
         <input type="text" id="body" name="body"  th:placeholder="text"
-               class="form-control" />
+               class="input" />
         <input type="checkbox" id="public_feedback"
-               class="form-control" /><label for="public_feedback">Public feedback</label>
+               class="checkbox" /><label for="public_feedback">Public feedback</label>
         <span th:utext="${successMessage}"></span>
         <button type="submit" class="add">Add task</button>
     </form>
@@ -40,7 +40,7 @@
                         <input id="taskStatus" name="task" type="hidden" th:value="${t.id}"/>
                         <select name="TaskStatus" onchange="this.form.submit()">
                             <option th:each="s : ${findAllStatus}"  th:value="${s.status}" th:text="${s.status}"
-                                    th:name="TaskStatus" th:selected="${s.id == t.taskStatus.id}"></option>
+                                    th:name="TaskStatus" th:selected="${s.id == t.taskStatus.id}"  ></option>
                         </select>
                     </form>
                 </td>

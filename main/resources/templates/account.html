@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head th:replace="layout :: site-head">
+    <title>Welcome to Spring MVC Tracker</title>
+</head>
+<body>
+<header th:replace="layoutAuth :: site-header" />
+<div>
+<p>Profile</p>
+<form autocomplete="off" action="#" th:action="@{/account}"
+      th:object="${user}" method="post" class="form-horizontal"
+      role="form">
+    <input id="edit" name="account" type="hidden" th:value="${user}" />
+    <label>E-mail</label>
+    <input type="email" id="email" name="email" th:field="*{email}" th:placeholder="${user.email}" class="input" />
+    <label th:if="${#fields.hasErrors('email')}" th:errors="*{email}"
+           class="validation-message"></label>
+    <label>Username</label>
+    <input type="text" id="name" name="name" th:placeholder="${user.username}" class="input" />
+    <label>New password</label>
+    <input type="password" id="newPassword" name="newPassword" class="input" />
+    <label>Conform new password</label>
+    <input type="password" id="confirmPassword" name="confirmPassword" class="input" />
+    <label>Current password</label>
+    <input type="password" id="currentPassword" name="currentPassword" class="input" />
+    <span th:utext="${errorMessage}"></span>
+    <span th:utext="${successMessage}"></span>
+    <button type="submit" class="add">Add project</button>
+</form>
+</div>
+<footer th:replace="layoutAuth :: site-footer" />
+</body>
+</html>
