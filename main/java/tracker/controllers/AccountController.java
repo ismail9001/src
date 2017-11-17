@@ -5,6 +5,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,17 +29,13 @@ public class AccountController {
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @RequestMapping(value = "/account", method = RequestMethod.GET)
-
-    public ModelAndView account() {
+    public String account(Model model) {
         User user = userService.findByEmail(SecurityContextHolder.getContext().getAuthentication().getName());
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("user", user);
-        modelAndView.setViewName("account");
-        return modelAndView;
+        model.addAttribute("user", user);
+        return "account";
     }
 
     @RequestMapping(value = "/account", method = RequestMethod.POST)
-
     public ModelAndView accountEdit(@RequestParam("account") String user1, HttpServletRequest request) {
         User user = userService.findByEmail(SecurityContextHolder.getContext().getAuthentication().getName());
 
@@ -60,15 +57,24 @@ public class AccountController {
         String confirmPassword = request.getParameter("confirmPassword");
 
         if (!newPassword.isEmpty() && !confirmPassword.isEmpty()) {
-            if(!newPassword.equals(confirmPassword)) {
+            if (currentPassword.isEmpty()) {
+                modelAndView.addObject("errorMessage", "Введите текущий пароль");
+                return modelAndView;
+            }
+            if (bCryptPasswordEncoder.matches(currentPassword, user.getPassword())) {
+                if (!newPassword.equals(confirmPassword)) {
+                    modelAndView.addObject("errorMessage", "Пароли не совпадают");
+                    return modelAndView;
+                }
+
+                user.setPassword(newPassword);
+                userService.saveUser(user);
+            }
+            else {
                 modelAndView.addObject("errorMessage", "Пароли не совпадают");
                 return modelAndView;
             }
-            user.setPassword(newPassword);
-            userService.saveUser(user);
-            return modelAndView;
         }
-
         modelAndView.addObject("user", user);
         return modelAndView;
     }

@@ -38,7 +38,7 @@ public class LoginController {
     }
 
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
-    public ModelAndView createNewUser(@Valid User user, String password, BindingResult bindingResult, HttpServletRequest httpServletRequest) {
+    public ModelAndView createNewUser(@Valid User user, BindingResult bindingResult, HttpServletRequest httpServletRequest) {
         ModelAndView modelAndView = new ModelAndView();
         User userExists = userService.findByEmail(user.getEmail());
         if (userExists != null) {
@@ -54,7 +54,7 @@ public class LoginController {
             //modelAndView.addObject("successMessage", "User has been registered successfully");
             modelAndView.addObject("user", new User());
             try {
-                httpServletRequest.login(user.getEmail(),password);
+                httpServletRequest.login(user.getEmail(),user.getPassword());
             } catch(ServletException e) {
                 System.out.println(e);
             }

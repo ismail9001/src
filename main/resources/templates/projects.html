@@ -10,9 +10,8 @@
 
 <main id="projects">
     <a href='#' onclick='overlay2()'>Add project</a>
-    <article th:each="p : ${findAll}">
         <table>
-            <tr>
+            <tr th:each="p : ${findAll}">
                 <td>
                     <a th:href="@{'/' + ${p.id} + '/tasks/'}" class="title" th:text="${p.projectName}">Task Title</a>
                 </td>
@@ -50,7 +49,6 @@
                 </td>
             </tr>
         </table>
-    </article>
 </main>
 <footer th:replace="layoutAuth :: site-footer" />
 <script src="../public/js/pop.js" th:src="@{/js/pop.js}"></script>
