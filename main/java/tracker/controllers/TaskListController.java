@@ -12,6 +12,8 @@ import tracker.models.Task;
 import tracker.models.TaskStatus;
 import tracker.repositories.TaskStatusRepository;
 import tracker.services.*;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -81,7 +83,7 @@ public class TaskListController {
 
     @RequestMapping(value = "/{project}/tasks/edit", method = RequestMethod.POST)
     @ResponseBody
-    public ModelAndView editT(@RequestParam("task") int taskId, @RequestParam("TaskStatus") String taskStatus, @PathVariable ("project")Project project) {
+    public ModelAndView editT(HttpServletRequest request, @RequestParam("task") int taskId, @RequestParam("TaskStatus") String taskStatus, @PathVariable ("project")Project project) {
 
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("project", project);

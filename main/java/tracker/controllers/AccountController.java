@@ -11,11 +11,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import tracker.models.Project;
+import tracker.models.Task;
 import tracker.models.User;
 import tracker.services.ProjectService;
 import tracker.services.UserService;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -36,27 +38,28 @@ public class AccountController {
     }
 
     @RequestMapping(value = "/account", method = RequestMethod.POST)
-    public ModelAndView accountEdit(@RequestParam("account") String user1, HttpServletRequest request) {
+    public ModelAndView accountEdit(HttpServletRequest request) {
+
         User user = userService.findByEmail(SecurityContextHolder.getContext().getAuthentication().getName());
-
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("user", user);
-        modelAndView.setViewName("account");
-
         String email = request.getParameter("email");
-        if (!email.isEmpty()) {
-            user.setEmail(email);
-        }
-        String username = request.getParameter("name");
-        if (!username.isEmpty()) {
-            user.setUsername(username);
-        }
-
         String currentPassword = request.getParameter("currentPassword");
         String newPassword = request.getParameter("newPassword");
         String confirmPassword = request.getParameter("confirmPassword");
+        String username = request.getParameter("username");
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("account");
 
+        if (!email.isEmpty()) {
+            user.setEmail(email);
+        }
+        if (!username.isEmpty()) {
+            user.setUsername(username);
+        }
         if (!newPassword.isEmpty() && !confirmPassword.isEmpty()) {
+            if (currentPassword.length() < 8) {
+                modelAndView.addObject("errorMessage", "Password must be at least 8 characters");
+                return modelAndView;
+            }
             if (currentPassword.isEmpty()) {
                 modelAndView.addObject("errorMessage", "Введите текущий пароль");
                 return modelAndView;
@@ -66,12 +69,11 @@ public class AccountController {
                     modelAndView.addObject("errorMessage", "Пароли не совпадают");
                     return modelAndView;
                 }
-
                 user.setPassword(newPassword);
                 userService.saveUser(user);
             }
             else {
-                modelAndView.addObject("errorMessage", "Пароли не совпадают");
+                modelAndView.addObject("errorMessage", "Введенный пароль не совпадает");
                 return modelAndView;
             }
         }

@@ -11,7 +11,7 @@
 <main id="projects">
     <a href='#' onclick='overlay2()'>Add project</a>
         <table>
-            <tr th:each="p : ${findAll}">
+            <tr th:each="p : ${findAllProjects}">
                 <td>
                     <a th:href="@{'/' + ${p.id} + '/tasks/'}" class="title" th:text="${p.projectName}">Task Title</a>
                 </td>
@@ -34,7 +34,7 @@
                                     <input type="text" id="mainURL" name="mainURL"  th:placeholder="${p.mainURL}"
                                            class="form-control" />
                                     <span th:utext="${successMessage}"></span>
-                                    <button type="submit" class="add">Add project</button>
+                                    <button type="submit" class="submit_button">Add project</button>
                                 </form>Click here to <a href='#' onclick='overlay()'>close</a>
                             </div>
                         </div>
@@ -51,7 +51,6 @@
         </table>
 </main>
 <footer th:replace="layoutAuth :: site-footer" />
-<script src="../public/js/pop.js" th:src="@{/js/pop.js}"></script>
 </body>
 
 </html>

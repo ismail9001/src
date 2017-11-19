@@ -28,10 +28,9 @@ public class ProjectListController {
 
     @RequestMapping(value = "/projects", method = RequestMethod.GET)
     public String projects (Model model) {
-        List<Project> findAll = projectService.findAll(userService.findByEmail(SecurityContextHolder.getContext().getAuthentication().getName()));
-        model.addAttribute("findAll", findAll);
         return "projects";
     }
+
     @RequestMapping(value = "/projects", method = RequestMethod.POST)
     public ModelAndView createNewProject(@Valid Project project, BindingResult bindingResult) {
         ModelAndView modelAndView = new ModelAndView();
@@ -49,9 +48,11 @@ public class ProjectListController {
         return modelAndView;
     }
     @RequestMapping(value = "/projects/remove", method = RequestMethod.POST)
-    public String removeP(@RequestParam("project") int projectId) {
+    public String removeP(@RequestParam("project") int projectId, Model model) {
         projectService.deleteById(projectId);
         notifyService.addInfoMessage("Project has been removed succesfully");
+        List<Project> findAll = projectService.findAll(userService.findByEmail(SecurityContextHolder.getContext().getAuthentication().getName()));
+        model.addAttribute("findAll", findAll);
         return "redirect:/projects";
     }
     @RequestMapping(value = "/projects/edit", method = RequestMethod.POST)

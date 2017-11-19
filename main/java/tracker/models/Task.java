@@ -23,7 +23,7 @@ public class Task {
     private boolean is_actual;
     @Column
     private Date date_closed;
-    @Column (nullable = false, columnDefinition = "DATE default '15-JUL-1980'")
+    @Column (nullable = false)
     private Date date_created;
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     @JoinColumn(name="task_status_id")

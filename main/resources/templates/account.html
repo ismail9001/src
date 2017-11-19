@@ -11,13 +11,14 @@
 <form autocomplete="off" action="#" th:action="@{/account}"
       th:object="${user}" method="post" class="form-horizontal"
       role="form">
-    <input id="edit" name="account" type="hidden" th:value="${user}" />
     <label>E-mail</label>
-    <input type="email" id="email" name="email" th:field="*{email}" th:placeholder="${user.email}" class="input" />
+    <input type="email" id="email" name="email" th:field="*{email}" th:placeholder="'Input email'" class="input" />
     <label th:if="${#fields.hasErrors('email')}" th:errors="*{email}"
            class="validation-message"></label>
     <label>Username</label>
-    <input type="text" id="name" name="name" th:placeholder="${user.username}" class="input" />
+    <input type="text" id="username" name="username" th:field="*{username}" th:placeholder="'Input username'" class="input" />
+    <label th:if="${#fields.hasErrors('username')}" th:errors="*{username}"
+           class="validation-message"></label>
     <label>New password</label>
     <input type="password" id="newPassword" name="newPassword" class="input" />
     <label>Conform new password</label>
@@ -26,7 +27,7 @@
     <input type="password" id="currentPassword" name="currentPassword" class="input" />
     <span th:utext="${errorMessage}"></span>
     <span th:utext="${successMessage}"></span>
-    <button type="submit" class="add">Add project</button>
+    <button type="submit" class="submit_button">Save</button>
 </form>
 </div>
 <footer th:replace="layoutAuth :: site-footer" />

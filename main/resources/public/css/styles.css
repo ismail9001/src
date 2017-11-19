@@ -22,22 +22,6 @@ margin-top: 18px;
 display: inline-block;
 margin-right: 10px;
 }
-body>aside {
-  float: right;
-  width: 200px;
-  background: #CCC;
-  padding: 15px;
-  margin-left: 20px;
-  margin-top: 10px;
-}
-body>aside h2 {
-  margin: 5px 0px 15px 0px;
-}
-body>aside a {
-  display: block;
-  margin: 5px 0px;
-  text-decoration: none;
-}
 body>main:after {
   content: '';
   display: block;
@@ -352,6 +336,23 @@ a#login_pop:hover, a#join_pop:hover {
 }
 
 /*чистый код */
+body>aside {
+  float: right;
+  width: 40%;
+  background: #CCC;
+  padding: 15px;
+  margin-left: 20px;
+  margin-top: 10px;
+}
+body>aside h2 {
+  margin: 5px 0px 15px 0px;
+}
+body>aside a {
+  display: block;
+  margin: 5px 0px;
+  text-decoration: none;
+}
+
 .input {
     display: block;
     box-sizing: border-box;
@@ -369,5 +370,15 @@ a#login_pop:hover, a#join_pop:hover {
     -webkit-transition: box-shadow .5s,border-color .25s ease-in-out;
     transition: box-shadow .5s,border-color .25s ease-in-out;
     -webkit-appearance: none;
-
 }
+
+.submit_button {
+    padding: .7em 1.5em;
+    border-color: #1767af;
+    background-color: #1d82dc;
+    font-weight: 600;
+    border-radius: 3px;
+    -webkit-appearance: none;
+    color: #fff;
+}
+

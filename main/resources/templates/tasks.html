@@ -7,7 +7,11 @@
 <body>
 
 <header th:replace="layoutAuth :: site-header" />
-
+<aside>
+    <h2>Task view</h2>
+    Work Begins on HTML5.1
+    <frame th:src="@{/tasks/taskView.html}" name="topFrame" scrolling="no"> </frame>
+</aside>
 <main id="tasks">
     <form autocomplete="off" action="#" th:action="@{'/' + ${project.id} + '/tasks/'}"
           th:object="${task}" method="post" class="form-horizontal"
@@ -19,12 +23,11 @@
         <input type="checkbox" id="public_feedback"
                class="checkbox" /><label for="public_feedback">Public feedback</label>
         <span th:utext="${successMessage}"></span>
-        <button type="submit" class="add">Add task</button>
+        <button type="submit" class="submit_button">Add task</button>
     </form>
-    <article th:each="t : ${findAllTasks}">
-        <table><h2 class="title" th:text="${t.title}">Task Title</h2>
-            <tr>
-                <td>
+        <table>
+            <tr th:each="t : ${findAllTasks}">
+                <td><h2 class="title" th:text="${t.title}">Task Title</h2>
                     <div class="date">
                     <i>Posted on</i>
                     <span th:text="${#dates.format(t.date_created, 'dd-MMM-yyyy')}">22-May-2016</span>
@@ -52,7 +55,6 @@
                 </td>
             </tr>
         </table>
-    </article>
 </main>
 
 <footer th:replace="layoutAuth :: site-footer" />
