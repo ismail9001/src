@@ -8,6 +8,7 @@ import tracker.models.Project;
 import tracker.models.Task;
 import tracker.models.TaskStatus;
 import tracker.repositories.TaskRepository;
+import tracker.repositories.TaskSourceRepository;
 import tracker.repositories.TaskStatusRepository;
 
 import java.util.Date;
@@ -22,6 +23,8 @@ public class TaskServiceJpaImpl implements TaskService {
     private UserService userService;
     @Autowired
     private TaskStatusRepository taskStatusRepo;
+    @Autowired
+    private TaskSourceRepository taskSourceRepo;
 
     @Override
     public List<Task> findAll(Project project) {
@@ -43,6 +46,7 @@ public class TaskServiceJpaImpl implements TaskService {
         task.setIs_actual(true);
         task.setProject(project);
         task.setTaskStatus(taskStatusRepo.findByStatus("New"));
+        task.setTaskSource(taskSourceRepo.findBySource("Web"));//потом  источник будет браться из библиотек
         return this.taskRepo.save(task);
     }
     @Override

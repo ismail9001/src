@@ -32,20 +32,15 @@ public class ProjectListController {
     }
 
     @RequestMapping(value = "/projects", method = RequestMethod.POST)
-    public ModelAndView createNewProject(@Valid Project project, BindingResult bindingResult) {
-        ModelAndView modelAndView = new ModelAndView();
+    public String createNewProject(@Valid Project project, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            modelAndView.setViewName("projects");
+            return "redirect:/projects";
         } else {
             projectService.create(project);
             notifyService.addInfoMessage("Project has been added succesfully");
-            //modelAndView.addObject("successMessage", "Project has been added succesfully");
-            modelAndView.addObject("project", new Project());
-            modelAndView.setViewName("projects");
-            List<Project> findAll = projectService.findAll(userService.findByEmail(SecurityContextHolder.getContext().getAuthentication().getName()));
-            modelAndView.addObject("findAll", findAll);
+            //modelAndView.addObject("successMessage", "Project has been added succesfully"); Для примера на будущее
         }
-        return modelAndView;
+        return "redirect:/projects";
     }
     @RequestMapping(value = "/projects/remove", method = RequestMethod.POST)
     public String removeP(@RequestParam("project") int projectId, Model model) {

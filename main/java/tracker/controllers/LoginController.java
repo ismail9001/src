@@ -4,6 +4,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +21,8 @@ public class LoginController {
     private UserService userService;
     @Autowired
     private NotificationService notifyService;
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @RequestMapping(value = {"/login"}, method = RequestMethod.GET)
     public ModelAndView login() {
@@ -38,12 +41,12 @@ public class LoginController {
     }
 
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
-    public ModelAndView createNewUser(@Valid User user, BindingResult bindingResult, HttpServletRequest httpServletRequest) {
+    public ModelAndView createNewUser(@Valid User user, BindingResult bindingResult,
+                                      HttpServletRequest httpServletRequest) {
         ModelAndView modelAndView = new ModelAndView();
         User userExists = userService.findByEmail(user.getEmail());
         if (userExists != null) {
-            bindingResult
-                    .rejectValue("email", "error.user",
+            bindingResult.rejectValue("email", "error.user",
                             "There is already a user registered with the email provided");
         }
         if (bindingResult.hasErrors()) {
@@ -51,10 +54,8 @@ public class LoginController {
         } else {
             userService.saveUser(user);
             notifyService.addInfoMessage("User has been registered successfully");
-            //modelAndView.addObject("successMessage", "User has been registered successfully");
-            modelAndView.addObject("user", new User());
             try {
-                httpServletRequest.login(user.getEmail(),user.getPassword());
+                httpServletRequest.login(user.getEmail(),httpServletRequest.getParameter("password"));
             } catch(ServletException e) {
                 System.out.println(e);
             }

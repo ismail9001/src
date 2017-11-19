@@ -17,7 +17,7 @@ public class Task {
     private String body;
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private User author;
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY,  cascade = CascadeType.ALL)
     private Project project;
     @Column (nullable = false, columnDefinition = "boolean default true")
     private boolean is_actual;
@@ -28,11 +28,15 @@ public class Task {
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     @JoinColumn(name="task_status_id")
     private TaskStatus taskStatus;
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    @JoinColumn(name="task_source_id")
+    private TaskSource taskSource;
     
     public Task() {
     }
 
-    public Task(int id, String title, String body, User author, Project project, boolean is_actual, Date date_closed, Date date_created, TaskStatus taskStatus) {
+    public Task(int id, String title, String body, User author, Project project, boolean is_actual, Date date_closed,
+                Date date_created, TaskStatus taskStatus, TaskSource taskSource) {
         this.id = id;
         this.title = title;
         this.body = body;
@@ -42,6 +46,7 @@ public class Task {
         this.date_closed = date_closed;
         this.date_created = date_created;
         this.taskStatus = taskStatus;
+        this.taskSource = taskSource;
     }
 
     @Override
@@ -119,5 +124,13 @@ public class Task {
 
     public void setTaskStatus(TaskStatus taskStatus) {
         this.taskStatus = taskStatus;
+    }
+
+    public TaskSource getTaskSource() {
+        return taskSource;
+    }
+
+    public void setTaskSource(TaskSource taskSource) {
+        this.taskSource = taskSource;
     }
 }

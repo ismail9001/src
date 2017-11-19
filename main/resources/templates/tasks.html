@@ -39,6 +39,9 @@
                     <p class="content" th:utext="${t.body}">Task content</p>
                 </td>
                 <td>
+                    <span th:text="${t.taskSource.source}" th:remove="tag"></span>
+                </td>
+                <td>
                     <form th:action="@{'/' + ${project.id} + '/tasks/edit'}" method="POST">
                         <input id="taskStatus" name="task" type="hidden" th:value="${t.id}"/>
                         <select name="TaskStatus" onchange="this.form.submit()">
