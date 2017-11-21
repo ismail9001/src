@@ -38,10 +38,11 @@ public class User {
     private Date lastLogin;
     @Column(name = "reset_token")
     private String resetToken;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Project watched_project;
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
-
     @OneToMany(mappedBy = "author")
     private Set<Task> task = new HashSet<>();
 
@@ -152,6 +153,14 @@ public class User {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+    public Project getWatched_project() {
+        return watched_project;
+    }
+
+    public void setWatched_project(Project watched_project) {
+        this.watched_project = watched_project;
     }
 
     @Override

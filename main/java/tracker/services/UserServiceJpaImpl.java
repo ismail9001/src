@@ -1,6 +1,7 @@
 package tracker.services;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import tracker.models.Project;
 import tracker.models.Role;
 import tracker.models.User;
 import tracker.repositories.RoleRepository;
@@ -39,5 +40,16 @@ public class UserServiceJpaImpl implements UserService {
         Role userRole = roleRepo.findByRole("ADMIN");
         user.setRoles(new HashSet<>(Arrays.asList(userRole)));
         userRepo.save(user);
+    }
+
+    @Override
+    public void setWatchedProject(User user, Project watchedProject) {
+        user.setWatched_project(watchedProject);
+        userRepo.save(user);
+    }
+
+    @Override
+    public void deleteWatchedProject(Project project) {
+        this.userRepo.deleteWatchedProject(project);
     }
 }

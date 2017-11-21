@@ -21,7 +21,7 @@
                         <a href='#' onclick='overlay2()'>Add project</a>
                     </div>
                     <div th:if="${!findAllProjects.isEmpty()}">
-                        <a th:href="@{'/' + ${findAllProjects[0].id} + '/tasks'}" th:text="${findAllProjects[0].projectName}"></a>
+                        <a th:href="@{'/' + ${watchedProject.id} + '/tasks'}" th:text="${watchedProject.projectName}"></a>
                     </div>
                     <ul>
                         <li>

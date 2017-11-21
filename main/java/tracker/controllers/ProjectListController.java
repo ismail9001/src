@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import tracker.models.Project;
 import tracker.models.TaskStatus;
+import tracker.models.User;
 import tracker.services.NotificationService;
 import tracker.services.ProjectService;
 import tracker.services.TaskStatusService;
@@ -17,7 +18,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @Controller
-public class ProjectListController {
+public class ProjectListController extends MainController{
 
     @Autowired
     private ProjectService projectService;
@@ -36,7 +37,9 @@ public class ProjectListController {
         if (bindingResult.hasErrors()) {
             return "redirect:/projects";
         } else {
+            User user = userService.findByEmail(SecurityContextHolder.getContext().getAuthentication().getName());
             projectService.create(project);
+            userService.setWatchedProject(user, project);
             notifyService.addInfoMessage("Project has been added succesfully");
             //modelAndView.addObject("successMessage", "Project has been added succesfully"); Для примера на будущее
         }
@@ -44,9 +47,15 @@ public class ProjectListController {
     }
     @RequestMapping(value = "/projects/remove", method = RequestMethod.POST)
     public String removeP(@RequestParam("project") int projectId, Model model) {
+        Project project = projectService.findOne(projectId);
         projectService.deleteById(projectId);
+        User user = userService.findByEmail(SecurityContextHolder.getContext().getAuthentication().getName());
+        List<Project> findAll = projectService.findAll(user);
+        //проверка для отображения проекта в шапке быстрого доступа
+        if (user.getWatched_project().getId() == project.getId() && findAll.size() != 0) {
+                userService.setWatchedProject(user, findAll.get(0));
+            }
         notifyService.addInfoMessage("Project has been removed succesfully");
-        List<Project> findAll = projectService.findAll(userService.findByEmail(SecurityContextHolder.getContext().getAuthentication().getName()));
         model.addAttribute("findAll", findAll);
         return "redirect:/projects";
     }

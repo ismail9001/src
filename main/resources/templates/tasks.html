@@ -7,61 +7,76 @@
 <body>
 
 <header th:replace="layoutAuth :: site-header" />
-<aside>
-    <h2>Task view</h2>
-    Work Begins on HTML5.1
-    <frame th:src="@{/tasks/taskView.html}" name="topFrame" scrolling="no"> </frame>
-</aside>
 <main id="tasks">
-    <form autocomplete="off" action="#" th:action="@{'/' + ${project.id} + '/tasks/'}"
-          th:object="${task}" method="post" class="form-horizontal"
-          role="form">
-        <input type="text" id="taskTitle" name="Title"  th:placeholder="Title"
-               class="input" />
-        <input type="text" id="body" name="body"  th:placeholder="text"
-               class="input" />
-        <input type="checkbox" id="public_feedback"
-               class="checkbox" /><label for="public_feedback">Public feedback</label>
-        <span th:utext="${successMessage}"></span>
-        <button type="submit" class="submit_button">Add task</button>
-    </form>
-        <table>
-            <tr th:each="t : ${findAllTasks}">
-                <td><h2 class="title" th:text="${t.title}">Task Title</h2>
-                    <div class="date">
-                    <i>Posted on</i>
-                    <span th:text="${#dates.format(t.date_created, 'dd-MMM-yyyy')}">22-May-2016</span>
-                    <span th:if="${t.author}" th:remove="tag">
-                        <i>by</i>
-                        <span th:text="${t.author.username}">Svetlin Nakov</span>
-                    </span>
-                    </div>
-                    <p class="content" th:utext="${t.body}">Task content</p>
-                </td>
-                <td>
-                    <span th:text="${t.taskSource.source}" th:remove="tag"></span>
-                </td>
-                <td>
-                    <form th:action="@{'/' + ${project.id} + '/tasks/edit'}" method="POST">
-                        <input id="taskStatus" name="task" type="hidden" th:value="${t.id}"/>
-                        <select name="TaskStatus" onchange="this.form.submit()">
-                            <option th:each="s : ${findAllStatus}"  th:value="${s.status}" th:text="${s.status}"
-                                    th:name="TaskStatus" th:selected="${s.id == t.taskStatus.id}"  ></option>
-                        </select>
-                    </form>
-                </td>
-                <td>
-                    <form th:action="@{'/' + ${project.id} + '/tasks/remove'}" method="POST">
-                        <input id="task" name="task" type="hidden" th:value="${t.id}"/>
-                        <input type="image" value="delete" th:src="@{/img/delete.png}" onClick="return confirm('sure?')"/>
-                    </form>
-                </td>
-            </tr>
-        </table>
+    <div class="tasks_list">
+        <script>
+            jQuery(document).ready(function() {
+          $('.dropdown').click(function() {
+        var $list   = $(this),
+            index   = $('.dropdown, select[id^="converted_dropdown_"]').index( this ),
+            $select = $('<select />').attr('id', 'converted_dropdown_' + (index + 1));
+
+        $list.children('li').each(function(index) {
+          $select.append($('<option />').attr('value', index).html($(this).html()));
+        });
+
+        $list.replaceWith($select);
+          });
+        });
+        </script>
+            <table>
+                <tr th:each="t : ${findAllTasks}">
+                    <td><label th:text="${t.title}">Task Title</label>
+                        <div class="date">
+                        <i>Posted on</i>
+                        <span th:text="${#dates.format(t.date_created, 'dd-MMM-yyyy')}">22-May-2016</span>
+                        <span th:if="${t.author}" th:remove="tag">
+                            <i>by</i>
+                            <span th:text="${t.author.username}">Svetlin Nakov</span>
+                        </span>
+                        </div>
+                        <label class="content" th:utext="${t.body}">Task content</label>
+                    </td>
+                    <td>
+                        <span th:text="${t.taskSource.source}" th:remove="tag"></span>
+                    </td>
+                    <td>
+                        <form th:action="@{'/' + ${project.id} + '/tasks/edit'}" method="POST">
+                            <input id="taskStatus" name="task" type="hidden" th:value="${t.id}"/>
+                            <select name="TaskStatus" onchange="this.form.submit()">
+                                <option th:each="s : ${findAllStatus}"  th:value="${s.status}" th:text="${s.status}"
+                                        th:name="TaskStatus" th:selected="${s.id == t.taskStatus.id}"  ></option>
+                            </select>
+                        </form>
+                    </td>
+                    <td>
+                        <form th:action="@{'/' + ${project.id} + '/tasks/remove'}" method="POST">
+                            <input id="task" name="task" type="hidden" th:value="${t.id}"/>
+                            <input type="image" value="delete" th:src="@{/img/delete.png}" onClick="return confirm('sure?')"/>
+                        </form>
+                    </td>
+                </tr>
+            </table>
+        <form autocomplete="off" action="#" th:action="@{'/' + ${project.id} + '/tasks/'}"
+              th:object="${task}" method="post" class="form-horizontal"
+              role="form">
+            <input type="text" id="taskTitle" name="Title"  th:placeholder="Title"
+                   class="input" />
+            <input type="text" id="body" name="body"  th:placeholder="text"
+                   class="input" />
+            <input type="checkbox" id="public_feedback"
+                   class="checkbox" /><label for="public_feedback">Public feedback</label>
+            <span th:utext="${successMessage}"></span>
+            <button type="submit" class="submit_button">Add task</button>
+        </form>
+    </div>
+    <div class="task_info">
+        Task info
+
+    </div>
 </main>
 
 <footer th:replace="layoutAuth :: site-footer" />
-
 </body>
 
 </html>

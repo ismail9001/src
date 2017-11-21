@@ -21,7 +21,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @Controller
-public class AccountController {
+public class AccountController extends MainController{
 
     @Autowired
     private ProjectService projectService;

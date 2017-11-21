@@ -18,7 +18,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @Controller
-public class TaskListController {
+public class TaskListController extends MainController{
 
     @Autowired
     private TaskService taskService;
@@ -42,8 +42,11 @@ public class TaskListController {
         modelAndView.addObject("findAllTasks", findAll);
         modelAndView.addObject("findAllStatus", findAllStatus);
         final String currentUser = SecurityContextHolder.getContext().getAuthentication().getName();
+        userService.setWatchedProject(userService.findByEmail(currentUser), project);
+        modelAndView.addObject("watchedProject",  userService.findByEmail(currentUser).getWatched_project());
         modelAndView.addObject("user", userService.findByEmail(currentUser));
         modelAndView.setViewName("tasks");
+        System.out.println("2");
         return modelAndView;
     }
 

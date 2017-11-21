@@ -133,7 +133,7 @@ ul#projects_menu_right li {
 #projects_menu_left {
     display:block;
     position:absolute;
-    top:20px;
+    top:15px;
     left:20px;
 }
 #projects_menu_right {
@@ -382,3 +382,12 @@ body>aside a {
     color: #fff;
 }
 
+.tasks_list {
+    float:left;
+}
+.task_info {
+    margin-left: 50px;
+    border: 1px solid #999;
+    float: left;
+    width: 50%;
+}

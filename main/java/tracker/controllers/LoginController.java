@@ -54,6 +54,9 @@ public class LoginController {
         } else {
             userService.saveUser(user);
             notifyService.addInfoMessage("User has been registered successfully");
+
+            //автоматическая переадресация на страницу проектов после регистрации
+
             try {
                 httpServletRequest.login(user.getEmail(),httpServletRequest.getParameter("password"));
             } catch(ServletException e) {
