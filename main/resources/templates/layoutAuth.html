@@ -3,9 +3,9 @@
     <meta charset="UTF-8" />
     <link rel="stylesheet" href="../public/css/styles.css" th:href="@{/css/styles.css}" />
     <link rel="icon" href="../public/img/favicon.ico" th:href="@{/img/favicon.ico}" />
-    <script src="../public/js/jquery-3.2.1.min.js" th:src="@{/js/jquery-3.2.1.min.js}"></script>
-    <script src="../public/js/blog-scripts.js" th:src="@{/js/blog-scripts.js}"></script>
-    <script src="../public/js/popup.js" th:src="@{/js/popup.js}"></script>
+    <script th:src="@{/js/jquery-3.2.1.min.js}"></script>
+    <script th:src="@{/js/blog-scripts.js}"></script>
+    <script th:src="@{/js/popup.js}"></script>
     <meta th:include="this::head" th:remove="tag"/>
 </head>
 <body>
@@ -14,7 +14,7 @@
         <div class="menu">
             <ul id="projects_menu_left">
                 <li>
-                    <a th:href="@{/p.id/dashboard}" >Dashboard</a>
+                    <a th:href="@{/dashboard}" >Dashboard</a>
                 </li>
                 <li class="menuLeft">
                     <div th:if="${findAllProjects.isEmpty()}">
@@ -27,9 +27,7 @@
                         <li>
                             <div th:if="${!findAllProjects.isEmpty()}">
                                 <article th:each="p,stat : ${findAllProjects}">
-                                    <div th:if="${stat.index != 0}">
-                                        <a th:href="@{'/' + ${p.id} + '/tasks'}" class="title" th:text="${p.projectName}">Task Title</a>
-                                    </div>
+                                    <a th:href="@{'/' + ${p.id} + '/tasks'}" class="title" th:text="${p.projectName}">Task Title</a>
                                 </article>
                             </div>
                         </li>

@@ -61,7 +61,6 @@ public class ProjectListController extends MainController{
     }
     @RequestMapping(value = "/projects/edit", method = RequestMethod.POST)
     public String editP(@RequestParam("project") Project project, String projectName, String mainURL) {
-        System.out.println(project);
         projectService.edit(project, projectName, mainURL);
         notifyService.addInfoMessage("Project has been edited");
         return "redirect:/projects";

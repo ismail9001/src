@@ -384,10 +384,28 @@ body>aside a {
 
 .tasks_list {
     float:left;
+    width: 350px;
+}
+#task_list {
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+}
+#task_list > li {
+    list-style-type: none; /* Убираем маркеры */
+    border: 1px solid #999;
 }
 .task_info {
     margin-left: 50px;
     border: 1px solid #999;
     float: left;
     width: 50%;
+}
+.form-horizontal {
+    margin-top: 1rem;
+}
+#author {
+    float: left;
+}
+.date {
+text-align: right;
 }

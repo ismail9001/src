@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head th:replace="layoutAuth :: site-head">
+    <script th:src="@{/js/task_view.js}"></script>
 </head>
 
 <body>
@@ -9,54 +10,29 @@
 <header th:replace="layoutAuth :: site-header" />
 <main id="tasks">
     <div class="tasks_list">
-        <script>
-            jQuery(document).ready(function() {
-          $('.dropdown').click(function() {
-        var $list   = $(this),
-            index   = $('.dropdown, select[id^="converted_dropdown_"]').index( this ),
-            $select = $('<select />').attr('id', 'converted_dropdown_' + (index + 1));
-
-        $list.children('li').each(function(index) {
-          $select.append($('<option />').attr('value', index).html($(this).html()));
-        });
-
-        $list.replaceWith($select);
-          });
-        });
-        </script>
-            <table>
-                <tr th:each="t : ${findAllTasks}">
-                    <td><label th:text="${t.title}">Task Title</label>
-                        <div class="date">
-                        <i>Posted on</i>
-                        <span th:text="${#dates.format(t.date_created, 'dd-MMM-yyyy')}">22-May-2016</span>
-                        <span th:if="${t.author}" th:remove="tag">
-                            <i>by</i>
-                            <span th:text="${t.author.username}">Svetlin Nakov</span>
-                        </span>
-                        </div>
-                        <label class="content" th:utext="${t.body}">Task content</label>
-                    </td>
-                    <td>
-                        <span th:text="${t.taskSource.source}" th:remove="tag"></span>
-                    </td>
-                    <td>
-                        <form th:action="@{'/' + ${project.id} + '/tasks/edit'}" method="POST">
-                            <input id="taskStatus" name="task" type="hidden" th:value="${t.id}"/>
-                            <select name="TaskStatus" onchange="this.form.submit()">
-                                <option th:each="s : ${findAllStatus}"  th:value="${s.status}" th:text="${s.status}"
-                                        th:name="TaskStatus" th:selected="${s.id == t.taskStatus.id}"  ></option>
-                            </select>
-                        </form>
-                    </td>
-                    <td>
-                        <form th:action="@{'/' + ${project.id} + '/tasks/remove'}" method="POST">
-                            <input id="task" name="task" type="hidden" th:value="${t.id}"/>
-                            <input type="image" value="delete" th:src="@{/img/delete.png}" onClick="return confirm('sure?')"/>
-                        </form>
-                    </td>
-                </tr>
-            </table>
+        <ul id="task_list" th:each="t : ${findAllTasks}">
+            <li th:onclick="'javascript:SendGet(\'' + ${t.id} + '\');'">
+                #<span th:text="${t.id}" /> - <span th:text="${t.title}"/> <br/>
+                <span th:if="${t.author}" th:remove="tag">
+                    <span id="author" th:text="${t.author.username}">Svetlin Nakov</span>
+                </span>
+                <div class="date">
+                    <span th:text="${#dates.format(t.date_created, 'dd-MMM-yyyy')}">22-May-2016</span>
+                </div>
+                <span th:text="${t.taskSource.source}"></span>
+                <form th:action="@{'/' + ${project.id} + '/tasks/edit'}" method="POST">
+                    <input id="taskStatus" name="task" type="hidden" th:value="${t.id}"/>
+                    <select name="TaskStatus" onchange="this.form.submit()">
+                        <option th:each="s : ${findAllStatus}"  th:value="${s.status}" th:text="${s.status}"
+                                th:name="TaskStatus" th:selected="${s.id == t.taskStatus.id}"  ></option>
+                    </select>
+                </form>
+                <form th:action="@{'/' + ${project.id} + '/tasks/remove'}" method="POST">
+                    <input id="task" name="task" type="hidden" th:value="${t.id}"/>
+                    <input type="image" value="delete" th:src="@{/img/delete.png}" onClick="return confirm('sure?')"/>
+                </form>
+            </li>
+        </ul>
         <form autocomplete="off" action="#" th:action="@{'/' + ${project.id} + '/tasks/'}"
               th:object="${task}" method="post" class="form-horizontal"
               role="form">
@@ -70,10 +46,16 @@
             <button type="submit" class="submit_button">Add task</button>
         </form>
     </div>
-    <div class="task_info">
-        Task info
-
-    </div>
+    <span th:if="${!findAllTasks.isEmpty()}" th:remove="tag">
+        <div class="task_info">
+            Task info №
+            <span id="taskIdView" th:text="${findAllTasks[0].id}"/><br/>
+            <input id="taskTitleView" th:value="${findAllTasks[0].title}"/><br/>
+            <input id="taskAuthorView" th:value="${findAllTasks[0].author.username}"/><br/>
+            <span id="taskDateCreateView"  th:text="${findAllTasks[0].date_created}"/><br/>
+            <input id="taskBodyView" th:value="${findAllTasks[0].body}"/>
+        </div>
+    </span>
 </main>
 
 <footer th:replace="layoutAuth :: site-footer" />

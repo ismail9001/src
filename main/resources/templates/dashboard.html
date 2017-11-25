@@ -1,30 +1,27 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="layout :: site-head">
-    <title th:text="${task.title}">View Task</title>
+<head th:replace="layoutAuth :: site-head">
 </head>
 
 <body>
 
-<header th:replace="layout :: site-header" />
+<header th:replace="layoutAuth :: site-header" />
 
-<main id="tasks">
-    <article>
-        <h2 class="title" th:text="${task.title}">Task Title</h2>
-        <div class="date">
-            <i>Posted on</i>
-            <span th:text="${#dates.format(task.date, 'dd-MMM-yyyy')}">22-May-2016</span>
-            <span th:if="${task.author}" th:remove="tag">
-        <i>by</i>
-        <span th:text="${task.author.username}">Svetlin Nakov</span>
-        </span>
+<main>
+    <ul th:each="p : ${findAllProjects}">
+        <li>
+            <a th:href="@{'/' + ${p.id} + '/tasks/'}" class="title" th:text="${p.projectName}">Task Title</a>
+            <span th:text="${p.mainURL}">Main url</span>
+        </li>
+    </ul>
+    <span th:if="${!findAllProjects.isEmpty()}" th:remove="tag">
+        <div class="project_dashboard">
         </div>
-        <p class="content" th:utext="${task.body}">Task content</p>
-    </article>
+    </span>
 </main>
 
-<footer th:replace="layout :: site-footer" />
+<footer th:replace="layoutAuth :: site-footer" />
 
 </body>
 

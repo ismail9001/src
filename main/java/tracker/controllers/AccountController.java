@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import tracker.models.Project;
 import tracker.models.Task;
 import tracker.models.User;
+import tracker.services.NotificationService;
 import tracker.services.ProjectService;
 import tracker.services.UserService;
 
@@ -29,6 +30,8 @@ public class AccountController extends MainController{
     private UserService userService;
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
+    @Autowired
+    private NotificationService notifyService;
 
     @RequestMapping(value = "/account", method = RequestMethod.GET)
     public String account(Model model) {
@@ -70,13 +73,14 @@ public class AccountController extends MainController{
                     return modelAndView;
                 }
                 user.setPassword(newPassword);
-                userService.saveUser(user);
             }
             else {
                 modelAndView.addObject("errorMessage", "Введенный пароль не совпадает");
                 return modelAndView;
             }
         }
+        userService.saveUser(user);
+        notifyService.addInfoMessage("User has been saved");
         modelAndView.addObject("user", user);
         return modelAndView;
     }

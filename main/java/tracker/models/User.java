@@ -1,5 +1,6 @@
 package tracker.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -39,6 +40,7 @@ public class User {
     @Column(name = "reset_token")
     private String resetToken;
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnore
     private Project watched_project;
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))

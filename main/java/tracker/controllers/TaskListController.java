@@ -46,7 +46,6 @@ public class TaskListController extends MainController{
         modelAndView.addObject("watchedProject",  userService.findByEmail(currentUser).getWatched_project());
         modelAndView.addObject("user", userService.findByEmail(currentUser));
         modelAndView.setViewName("tasks");
-        System.out.println("2");
         return modelAndView;
     }
 

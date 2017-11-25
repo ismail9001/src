@@ -1,7 +1,9 @@
 package tracker.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Type;
 import javax.persistence.*;
+import java.util.Calendar;
 import java.util.Date;
 @Entity
 @Table(name = "tasks")
@@ -18,6 +20,7 @@ public class Task {
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private User author;
     @ManyToOne(optional = false, fetch = FetchType.LAZY,  cascade = CascadeType.ALL)
+    @JsonIgnore
     private Project project;
     @Column (nullable = false, columnDefinition = "boolean default true")
     private boolean is_actual;
@@ -78,10 +81,12 @@ public class Task {
         this.body = body;
     }
 
+    @JsonIgnore
     public User getAuthor() {
         return author;
     }
 
+    @JsonIgnore
     public void setAuthor(User author) {
         this.author = author;
     }

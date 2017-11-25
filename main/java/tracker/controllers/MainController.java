@@ -26,7 +26,6 @@ public class MainController {
             List<Project> findAll = projectService.findAll(user);
             model.addAttribute("findAllProjects", findAll);
             model.addAttribute("watchedProject", user.getWatched_project());
-            System.out.println("1");
         }
     }
 }
