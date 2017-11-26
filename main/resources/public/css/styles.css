@@ -409,3 +409,6 @@ body>aside a {
 .date {
 text-align: right;
 }
+#taskSource {
+float: left;
+}

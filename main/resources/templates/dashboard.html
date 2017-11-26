@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head th:replace="layoutAuth :: site-head">
+    <script th:src="@{/js/projectAnalyticsTaskGroup.js}"></script>
 </head>
 
 <body>
@@ -10,13 +11,17 @@
 
 <main>
     <ul th:each="p : ${findAllProjects}">
-        <li>
-            <a th:href="@{'/' + ${p.id} + '/tasks/'}" class="title" th:text="${p.projectName}">Task Title</a>
+        <li th:onclick="'javascript:ShowTasksGroup(\'' + ${p.id} + '\');'">
+            <span th:text="${p.projectName}">Task Title</span>
             <span th:text="${p.mainURL}">Main url</span>
         </li>
     </ul>
     <span th:if="${!findAllProjects.isEmpty()}" th:remove="tag">
         <div class="project_dashboard">
+            Tasks<br/>
+            New Tasks: <span id="newTasks" th:text="'newTasks'"/><br/>
+            Tasks in progress: <span id="progressTasks" th:text="'progressTasks'"/><br/>
+            Done Tasks: <span id="doneTasks" th:text="'doneTasks'"/><br/>
         </div>
     </span>
 </main>

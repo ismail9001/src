@@ -8,7 +8,7 @@ function SendGet(input_str) {
          contentType: 'application/json',
              mimeType: 'application/json',
          data : ({
-           text: inputText
+           taskId: inputText
          }),
          success: function (data) {
 
