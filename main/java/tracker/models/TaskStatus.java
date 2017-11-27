@@ -10,7 +10,7 @@ public class TaskStatus {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="id")
     private int id;
-    @Column(name="status")
+    @Column(name="status", unique = true, nullable = false)
     private String status;
 
     public int getId() {

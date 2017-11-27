@@ -9,7 +9,7 @@ public class TaskSource {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="id")
     private int id;
-    @Column(nullable = false, name="source")
+    @Column(nullable = false, name="source", unique = true)
     private String source;
 
     public int getId() {

@@ -1,6 +1,7 @@
 package tracker.services;
 
 import tracker.models.Project;
+import tracker.models.AjaxResponses.TasksListGroupByStatus;
 import tracker.models.Task;
 import tracker.models.TaskStatus;
 
@@ -13,4 +14,5 @@ public interface TaskService {
     Task create(Task task, Project project);
     Task edit(Task task, TaskStatus taskStatus);
     void deleteById(int id);
+    List<TasksListGroupByStatus> groupByStatus (Project project);
 }

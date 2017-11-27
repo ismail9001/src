@@ -11,11 +11,17 @@ function ShowTasksGroup(input_str) {
                 projectId: inputText
              }),
              success: function (data) {
-             var newTasks = data.newTasks;
+             if(typeof data.New === 'undefined')
+             $("#newTasks").text(0);
+             else var newTasks = data.New;
              $("#newTasks").text(newTasks);
-             var inProgressTasks = data.inProgressTasks;
+             if(typeof data['In work'] === 'undefined')
+             $("#progressTasks").text(0);
+             else var inProgressTasks = data['In work'];
              $("#progressTasks").text(inProgressTasks);
-             var doneTasks = data.doneTasks;
+             if(typeof data.Done === 'undefined')
+             $("#doneTasks").text(0);
+             else var doneTasks = data.Done;
              $("#doneTasks").text(doneTasks);
              }
          });

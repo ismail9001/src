@@ -53,6 +53,9 @@
                         <li class = "menuRight">
                             <a href="projects.html" th:href="@{/projects}">Projects</a>
                         </li>
+                        <li class = "menuRight">
+                            <a th:href="@{/command}">Command</a>
+                        </li>
                     </ul>
                 </li>
             </ul>
@@ -67,7 +70,6 @@
     </ul>
     <div id="overlay2">
         <div>
-            <p>Content you want the user to see goes here.</p>
             <form autocomplete="off" action="#" th:action="@{/projects}"
                   th:object="${project}" method="post" class="form-horizontal"
                   role="form">

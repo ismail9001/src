@@ -412,3 +412,11 @@ text-align: right;
 #taskSource {
 float: left;
 }
+.projectList {
+float: left;
+}
+.project_dashboard{
+padding-left: 100px;
+float: left;
+}
+

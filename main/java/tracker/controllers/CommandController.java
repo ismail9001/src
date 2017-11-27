@@ -5,10 +5,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class HomeController {
+public class CommandController  extends MainController{
 
-    @RequestMapping("/")
+    @RequestMapping("/command")
     public String index(Model model) {
-        return "index";
+        return "command";
     }
 }

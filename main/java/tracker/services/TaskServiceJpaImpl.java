@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import tracker.models.Project;
+import tracker.models.AjaxResponses.TasksListGroupByStatus;
 import tracker.models.Task;
 import tracker.models.TaskStatus;
 import tracker.repositories.TaskRepository;
@@ -57,5 +58,10 @@ public class TaskServiceJpaImpl implements TaskService {
     @Override
     public void deleteById(int id) {
         this.taskRepo.deleteById(id, new Date());
+    }
+
+    @Override
+    public List<TasksListGroupByStatus> groupByStatus(Project project) {
+            return this.taskRepo.groupByStatus(project);
     }
 }

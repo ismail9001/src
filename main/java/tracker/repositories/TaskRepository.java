@@ -4,14 +4,13 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 import tracker.models.Project;
+import tracker.models.AjaxResponses.TasksListGroupByStatus;
 import tracker.models.Task;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 
 @Repository
@@ -24,7 +23,6 @@ public interface TaskRepository extends JpaRepository<Task, Integer> {
     @Query("UPDATE Task t SET t.is_actual = 'f', t.date_closed = :date WHERE t.id = :id")
     void deleteById(@Param("id") int id, @Param("date") Date date);
     //запрос для вывода задач по статусам
-    //@Query("SELECT count(*), ts.status FROM Task t JOIN TaskStatus ts on t.taskStatus = ts.id where t.project = :id and t.is_actual = 't' GROUP BY ts.status")
-    //select "count"(*), ts.status from tasks t JOIN task_status ts on t.task_status_id = ts."id" group by ts.status
-    //HashMap<Integer, String> groupByStatus(@Param("id") Project project);
+    @Query("SELECT NEW tracker.models.AjaxResponses.TasksListGroupByStatus (t.taskStatus.status, count(*)) FROM Task t where t.project = :id and t.is_actual = 't' GROUP BY t.taskStatus.status")
+    List<TasksListGroupByStatus> groupByStatus(@Param("id") Project project);
 }

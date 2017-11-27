@@ -10,8 +10,8 @@
 <header th:replace="layoutAuth :: site-header" />
 
 <main>
-    <ul th:each="p : ${findAllProjects}">
-        <li th:onclick="'javascript:ShowTasksGroup(\'' + ${p.id} + '\');'">
+    <ul class="projectList">
+        <li th:each="p : ${findAllProjects}" th:onclick="'javascript:ShowTasksGroup(\'' + ${p.id} + '\');'">
             <span th:text="${p.projectName}">Task Title</span>
             <span th:text="${p.mainURL}">Main url</span>
         </li>
@@ -19,9 +19,9 @@
     <span th:if="${!findAllProjects.isEmpty()}" th:remove="tag">
         <div class="project_dashboard">
             Tasks<br/>
-            New Tasks: <span id="newTasks" th:text="'newTasks'"/><br/>
-            Tasks in progress: <span id="progressTasks" th:text="'progressTasks'"/><br/>
-            Done Tasks: <span id="doneTasks" th:text="'doneTasks'"/><br/>
+            New Tasks: <span id="newTasks" th:text="${newTasks}"/><br/>
+            Tasks in progress: <span id="progressTasks" th:text="${inWorkTasks}"/><br/>
+            Done Tasks: <span id="doneTasks" th:text="${doneTasks}"/><br/>
         </div>
     </span>
 </main>
