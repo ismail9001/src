@@ -336,6 +336,10 @@ a#login_pop:hover, a#join_pop:hover {
 }
 
 /*чистый код */
+.error {
+color: red;
+float: left;
+}
 body>aside {
   float: right;
   width: 40%;
@@ -353,6 +357,16 @@ body>aside a {
   text-decoration: none;
 }
 
+.col-sm-9 {
+    width: 15rem;
+}
+
+#showPassword {
+    margin: 5px 0 0 -33px;
+}
+#passwordInput {
+    float: left;
+}
 .input {
     display: block;
     box-sizing: border-box;
@@ -419,4 +433,5 @@ float: left;
 padding-left: 100px;
 float: left;
 }
+
 

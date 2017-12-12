@@ -1,8 +1,11 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 
 <head th:replace="layout :: site-head">
     <title>Registration</title>
+    <script src="../public/js/jquery.validate.js" th:src="@{/js/jquery.validate.js}"></script>
+    <script src="../public/js/registration_form_validation.js" th:src="@{/js/registration_form_validation.js}"></script>
+    <script src="../public/js/show_password.js" th:src="@{/js/show_password.js}"></script>
 </head>
 
 <body>
@@ -13,11 +16,11 @@
         <div class="col-md-6 col-md-offset-3">
             <form autocomplete="off" action="#" th:action="@{/registration}"
                   th:object="${user}" method="post" class="form-horizontal"
-                  role="form">
+                  role="form" id="registration_form">
                 <h2>Registration Form</h2>
                 <div class="form-group">
                     <div class="col-sm-9">
-                        <input type="text" th:field="*{username}" placeholder="Name"
+                        <input type="text" th:field="*{username}" placeholder="Name" name="username"
                                class="input" />
                         <label th:if="${#fields.hasErrors('username')}" th:errors="*{username}"
                                class="validation-message"></label>
@@ -26,7 +29,7 @@
 
                 <div class="form-group">
                     <div class="col-sm-9">
-                        <input type="text" th:field="*{email}" placeholder="Email"
+                        <input type="email" th:field="*{email}" placeholder="Email" name="email"
                                class="input" />
                         <label th:if="${#fields.hasErrors('email')}" th:errors="*{email}"
                             class="validation-message"></label>
@@ -44,21 +47,12 @@
                 <div class="form-group">
                     <div class="col-sm-9">
                         <input type="password" th:field="*{password}"
-                               placeholder="Password" class="input" />
+                               placeholder="Password" name="password" class="input" id="passwordInput"/>
+                        <img th:src="@{/img/hide_eye.png}" width="28" height="28" onclick="myFunction()" id="showPassword"/>
                         <label th:if="${#fields.hasErrors('password')}" th:errors="*{password}"
                             class="validation-message"></label>
                     </div>
                 </div>
-
-                <div class="form-group">
-                    <div class="col-sm-9">
-                        <input type="checkbox" th:field="*{subscribe}"
-                               class="form-control" />
-                        <label th:if="${#fields.hasErrors('subscribe')}" th:errors="*subscribe"
-                            class="validation-message"></label>
-                    </div>
-                </div>
-
                 <div class="form-group">
                     <div class="col-sm-9">
                         <button type="submit" class="submit_button">Register User</button>

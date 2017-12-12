@@ -19,6 +19,7 @@ public class MainController {
     @Autowired
     private UserService userService;
 
+
     @ModelAttribute(value = "findAllProjects")
     public void mainObjects (Model model) {
         User user = userService.findByEmail(SecurityContextHolder.getContext().getAuthentication().getName());

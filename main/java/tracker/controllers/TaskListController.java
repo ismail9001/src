@@ -85,7 +85,8 @@ public class TaskListController extends MainController{
 
     @RequestMapping(value = "/{project}/tasks/edit", method = RequestMethod.POST)
     @ResponseBody
-    public ModelAndView editT(HttpServletRequest request, @RequestParam("task") int taskId, @RequestParam("TaskStatus") String taskStatus, @PathVariable ("project")Project project) {
+    public ModelAndView editT(HttpServletRequest request, @RequestParam("task") int taskId,
+                              @RequestParam("TaskStatus") String taskStatus, @PathVariable ("project")Project project) {
 
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("project", project);
