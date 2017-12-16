@@ -70,18 +70,17 @@
     </ul>
     <div id="overlay2">
         <div>
-            <form autocomplete="off" action="#" th:action="@{/projects}"
-                  th:object="${project}" method="post" class="form-horizontal"
-                  role="form">
-                <input type="text" id="title" name="projectName"  th:placeholder="project_name"
-                       class="input" />
-                <input type="text" id="mainURL" name="mainURL"  th:placeholder="mainURL"
-                       class="input" />
-                <input type="checkbox" id="public_feedback"
-                       class="checkbox" /><label for="public_feedback">Public feedback</label>
+            <form autocomplete="off" action="#" th:action="@{/projects}" th:object="${project}" method="post"
+                  class="form-horizontal" role="form">
+                <label>Project creation</label> <br/> <br/>
+                <input type="text" id="title" name="projectName"  placeholder="Project name*" class="input" />
+                <label>Add member</label>
+                <textarea type="text" id="invite_emails" name="invite_emails"
+                          placeholder="Write one or more e-mail addresses, separated by commas." class="input" />
                 <span th:utext="${successMessage}"></span>
+                <button  class="submit_button" onclick='overlay2()'>Cancel</button>
                 <button type="submit" class="submit_button">Add project</button>
-            </form>Click here to <a href='#' onclick='overlay2()'>close</a>
+            </form>
         </div>
     </div>
 </header>

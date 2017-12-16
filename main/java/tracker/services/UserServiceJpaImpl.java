@@ -29,7 +29,7 @@ public class UserServiceJpaImpl implements UserService {
     }
 
     @Override
-    public Optional<User> findUserByResetToken(String resetToken) {
+    public User findUserByResetToken(String resetToken) {
         return userRepo.findByResetToken(resetToken);
     }
 

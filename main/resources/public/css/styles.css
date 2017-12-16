@@ -386,6 +386,10 @@ body>aside a {
     -webkit-appearance: none;
 }
 
+#invite_emails{
+    height: 10rem;
+}
+
 .submit_button {
     padding: .7em 1.5em;
     border-color: #1767af;

@@ -36,9 +36,8 @@ public class ProjectServiceJpaImpl  implements ProjectService {
     }
 
     @Override
-    public Project edit(Project project, String projectName, String mainURL) {
+    public Project edit(Project project, String projectName) {
         project.setProjectName(projectName);
-        project.setMainURL(mainURL);
         return this.projectRepo.save(project);
     }
 

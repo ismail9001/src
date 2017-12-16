@@ -12,7 +12,7 @@ import java.util.Optional;
 public interface UserRepository extends JpaRepository<User, Integer> {
     User findByEmail(String email);
     @Query("SELECT u FROM User u where u.resetToken= :resetToken")
-    Optional <User> findByResetToken(@Param("resetToken") String resetToken);
+    User findByResetToken(@Param("resetToken") String resetToken);
     @Query("UPDATE User u SET u.watched_project = 'NULL' WHERE u.watched_project = :id")//не пашет запрос
     void deleteWatchedProject(@Param("id") Project project);
 }

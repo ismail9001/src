@@ -60,8 +60,8 @@ public class ProjectListController extends MainController{
         return "redirect:/projects";
     }
     @RequestMapping(value = "/projects/edit", method = RequestMethod.POST)
-    public String editP(@RequestParam("project") Project project, String projectName, String mainURL) {
-        projectService.edit(project, projectName, mainURL);
+    public String editP(@RequestParam("project") Project project, String projectName) {
+        projectService.edit(project, projectName);
         notifyService.addInfoMessage("Project has been edited");
         return "redirect:/projects";
     }

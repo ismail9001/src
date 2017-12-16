@@ -16,9 +16,6 @@
                     <a th:href="@{'/' + ${p.id} + '/tasks/'}" class="title" th:text="${p.projectName}">Task Title</a>
                 </td>
                 <td>
-                    <span th:text="${p.mainURL}">Main url</span>
-                </td>
-                <td>
                     <a th:href="'#'+${p.id}" id="join_pop"><img th:src="@{/img/edit.png}" width="20" height="20"/></a>
                     <a href="#x" class="overlay" th:id="${p.id}"></a>
                     <div class="popup">
@@ -30,8 +27,6 @@
                                       role="form">
                                     <input id="edit" name="project" type="hidden" th:value="${p.id}"/>
                                     <input type="text" id="title" name="projectName"  th:placeholder="${p.projectName}"
-                                           class="form-control" />
-                                    <input type="text" id="mainURL" name="mainURL"  th:placeholder="${p.mainURL}"
                                            class="form-control" />
                                     <span th:utext="${successMessage}"></span>
                                     <button type="submit" class="submit_button">Add project</button>

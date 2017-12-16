@@ -15,9 +15,6 @@ public class Project {
     private String projectName;
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private User user;
-    @Column(nullable = false)
-    @NotEmpty(message = "*Please provide main url of your project")
-    private String mainURL;
     @Column
     private String devURL;
     @Column (nullable = false)
@@ -32,12 +29,11 @@ public class Project {
     public Project() {
     }
 
-    public Project(int id, String projectName, User user, String mainURL, String devURL, boolean publicFeedback,
+    public Project(int id, String projectName, User user, String devURL, boolean publicFeedback,
                    boolean is_actual, Date date_closed, Date date_created) {
         this.id = id;
         this.projectName = projectName;
         this.user = user;
-        this.mainURL = mainURL;
         this.devURL = devURL;
         this.publicFeedback = publicFeedback;
         this.is_actual = is_actual;
@@ -72,14 +68,6 @@ public class Project {
 
     public void setUser(User user) {
         this.user = user;
-    }
-
-    public String getMainURL() {
-        return mainURL;
-    }
-
-    public void setMainURL(String mainURL) {
-        this.mainURL = mainURL;
     }
 
     public String getDevURL() {
